@@ -237,28 +237,50 @@
           </p>
         </div>
 
-        <form class="enroll-card">
+        <form class="enroll-card" id="request-info-form">
           <label>
             Child's name
-            <input type="text" placeholder="Byte-sized inventor">
+            <input
+              type="text"
+              name="childName"
+              placeholder="Byte-sized inventor"
+              autocomplete="name"
+              required
+            >
           </label>
           <label>
             Parent email
-            <input type="email" placeholder="you@example.com">
+            <input
+              type="email"
+              name="parentEmail"
+              placeholder="you@example.com"
+              autocomplete="email"
+              required
+            >
           </label>
           <label>
             Age group
-            <select>
-              <option>Select a group</option>
+            <select name="ageGroup" required>
+              <option value="">Select a group</option>
               <option>Ages 6-8</option>
               <option>Ages 9-11</option>
               <option>Ages 12-14</option>
             </select>
           </label>
-          <button class="button button-primary" type="button">Request Info</button>
+          <label>
+            Tell us anything helpful
+            <textarea
+              name="notes"
+              rows="4"
+              placeholder="Interests, experience level, schedule questions, or anything you'd like us to know"
+            ></textarea>
+          </label>
+          <button class="button button-primary" type="submit">Request Info</button>
+          <p class="form-status" id="form-status" role="status" aria-live="polite"></p>
         </form>
       </section>
     </main>
   </div>
+  <script src="main.js"></script>
 </body>
 </html>

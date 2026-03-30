@@ -277,12 +277,24 @@ p {
 
 .eye {
   position: static;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 1.1rem;
   height: 1.4rem;
   margin: -0.6rem 1.55rem 0;
   border-radius: 999px;
   background: var(--ink);
   animation: blink 4.2s infinite;
+}
+
+.eye::after {
+  content: "";
+  width: 0.32rem;
+  height: 0.32rem;
+  border-radius: 50%;
+  background: white;
+  transform: translateY(-0.12rem);
 }
 
 .robot-smile {
@@ -605,7 +617,8 @@ section {
 }
 
 .enroll-card input,
-.enroll-card select {
+.enroll-card select,
+.enroll-card textarea {
   width: 100%;
   min-height: 3.1rem;
   padding: 0.8rem 1rem;
@@ -614,6 +627,41 @@ section {
   background: rgba(255, 255, 255, 0.9);
   color: var(--ink);
   font: inherit;
+}
+
+.enroll-card textarea {
+  min-height: 7.5rem;
+  resize: vertical;
+}
+
+.enroll-card input:focus,
+.enroll-card select:focus,
+.enroll-card textarea:focus {
+  outline: 3px solid rgba(86, 196, 196, 0.25);
+  border-color: rgba(35, 146, 154, 0.35);
+}
+
+.enroll-card .button:disabled {
+  opacity: 0.72;
+  cursor: wait;
+}
+
+.form-status {
+  min-height: 1.6rem;
+  margin: 0;
+  font-weight: 800;
+}
+
+.form-status[data-state="pending"] {
+  color: var(--teal-dark);
+}
+
+.form-status[data-state="success"] {
+  color: #2d8a57;
+}
+
+.form-status[data-state="error"] {
+  color: #b44058;
 }
 
 @keyframes bob {
