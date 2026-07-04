@@ -1,2 +1,8 @@
 .obsidian
 .vercel
+node_modules
+.next
+out
+.env*.local
+.env
+next-env.d.ts
