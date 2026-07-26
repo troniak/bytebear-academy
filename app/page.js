@@ -109,7 +109,7 @@ const footerLinks = {
     ["Contact Us", "#enroll"],
   ],
   Resources: [
-    ["Blog", "#top"],
+    ["Blog", "https://hub.bytebearacademy.com"],
     ["Events", "#top"],
     ["FAQ", "#top"],
     ["Privacy Policy", "#top"],
@@ -372,7 +372,14 @@ export default function Home() {
                 <ul>
                   {links.map(([label, href]) => (
                     <li key={label}>
-                      <a href={href}>{label}</a>
+                      <a
+                        href={href}
+                        {...(href.startsWith("http")
+                          ? { target: "_blank", rel: "noopener noreferrer" }
+                          : {})}
+                      >
+                        {label}
+                      </a>
                     </li>
                   ))}
                 </ul>
