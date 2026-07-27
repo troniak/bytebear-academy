@@ -159,42 +159,13 @@ section {
 }
 
 .brand {
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  gap: 0.65rem;
 }
 
-.brand-bear-icon {
-  width: 46px;
-  height: 44px;
-  color: var(--navy);
-  --bear-code: var(--teal);
-}
-
-.brand-text {
-  display: flex;
-  flex-direction: column;
-  line-height: 1.05;
-}
-
-.brand-name {
-  font-family: var(--font-heading), sans-serif;
-  font-weight: 800;
-  font-size: 1.45rem;
-  color: var(--navy);
-}
-
-.brand-name span {
-  color: var(--teal);
-}
-
-.brand-sub {
-  font-family: var(--font-heading), sans-serif;
-  font-size: 0.62rem;
-  font-weight: 600;
-  letter-spacing: 0.52em;
-  color: var(--teal);
-  text-transform: uppercase;
+.brand-logo {
+  width: auto;
+  height: 46px;
 }
 
 .nav {
@@ -900,21 +871,8 @@ section {
   padding-bottom: 2.5rem;
 }
 
-.footer .brand-bear-icon {
-  color: var(--white);
-  --bear-code: #4fd8d2;
-}
-
-.footer .brand-name {
-  color: var(--white);
-}
-
-.footer .brand-name span {
-  color: #4fd8d2;
-}
-
-.footer .brand-sub {
-  color: #4fd8d2;
+.footer .brand-logo {
+  height: 52px;
 }
 
 .footer-blurb {
@@ -1136,6 +1094,11 @@ section {
 
   .watermark {
     display: none;
+  }
+
+  .brand-logo,
+  .footer .brand-logo {
+    height: 38px;
   }
 
   .testimonial-band {

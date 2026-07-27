@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import BearIcon from "./BearIcon";
+import Image from "next/image";
 
 const links = [
   { href: "#top", label: "Home" },
@@ -19,14 +19,15 @@ export default function Header() {
     <header className="header">
       <div className="container">
         <div className="header-inner">
-          <a className="brand" href="#top" aria-label="ByteBear Academy home">
-            <BearIcon className="brand-bear-icon" />
-            <span className="brand-text">
-              <span className="brand-name">
-                Byte<span>Bear</span>
-              </span>
-              <span className="brand-sub">Academy</span>
-            </span>
+          <a className="brand" href="#top">
+            <Image
+              className="brand-logo"
+              src="/images/logo-bytebear.png"
+              alt="ByteBear Academy"
+              width={352}
+              height={100}
+              priority
+            />
           </a>
 
           <nav className="nav" aria-label="Main navigation">

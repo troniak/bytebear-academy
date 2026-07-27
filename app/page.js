@@ -333,14 +333,14 @@ export default function Home() {
         <div className="container">
           <div className="footer-grid">
             <div>
-              <a className="brand" href="#top" aria-label="ByteBear Academy home">
-                <BearIcon className="brand-bear-icon" />
-                <span className="brand-text">
-                  <span className="brand-name">
-                    Byte<span>Bear</span>
-                  </span>
-                  <span className="brand-sub">Academy</span>
-                </span>
+              <a className="brand" href="#top">
+                <Image
+                  className="brand-logo"
+                  src="/images/logo-bytebear-light.png"
+                  alt="ByteBear Academy"
+                  width={352}
+                  height={100}
+                />
               </a>
               <p className="footer-blurb">
                 AI-enabled STEM education for kids 6–14. Code. Create. Explore. The future starts
