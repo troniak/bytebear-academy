@@ -1,9 +1,13 @@
 import Image from "next/image";
-import BearIcon from "@/components/BearIcon";
+import Link from "next/link";
 import Header from "@/components/Header";
+import Footer from "@/components/Footer";
 import Testimonials from "@/components/Testimonials";
 import EnrollForm from "@/components/EnrollForm";
-import NewsletterForm from "@/components/NewsletterForm";
+import LumaCheckout from "@/components/LumaCheckout";
+import WorkshopCard from "@/components/WorkshopCard";
+import WorkshopCalendar from "@/components/WorkshopCalendar";
+import { upcomingWorkshops, workshopJsonLd } from "@/lib/workshops";
 import {
   ArrowRight,
   Chip,
@@ -19,10 +23,6 @@ import {
   Monitor,
   MapleLeaf,
   Check,
-  Facebook,
-  Instagram,
-  Youtube,
-  Linkedin,
 } from "@/components/Icons";
 
 const trustItems = [
@@ -94,29 +94,23 @@ const stats = [
   { icon: <MapleLeaf />, value: "Across Canada", label: "Online & In-Person", pink: true },
 ];
 
-const footerLinks = {
-  Programs: [
-    ["AI & Coding", "#programs"],
-    ["Robotics", "#programs"],
-    ["Game Design", "#programs"],
-    ["Creative Tech", "#programs"],
-    ["View All Programs", "#programs"],
-  ],
-  Company: [
-    ["About Us", "#about"],
-    ["Our Mission", "#about"],
-    ["Careers", "#enroll"],
-    ["Contact Us", "#enroll"],
-  ],
-  Resources: [
-    ["Blog", "https://hub.bytebearacademy.com"],
-    ["Events", "#top"],
-    ["FAQ", "#top"],
-    ["Privacy Policy", "#top"],
-  ],
-};
+// The upcoming-session filter runs at render time, so refresh the static page
+// hourly rather than freezing "upcoming" at build time.
+export const revalidate = 3600;
 
 export default function Home() {
+  const sessions = upcomingWorkshops();
+
+  // The calendar is a client component, so anything handed to it is serialized
+  // into the HTML. Send only the four fields it renders — otherwise every
+  // session's full markdown body ships to the browser unused.
+  const calendarSessions = sessions.map(({ id, startsAt, title, accent }) => ({
+    id,
+    startsAt,
+    title,
+    accent,
+  }));
+
   return (
     <div id="top">
       <Header />
@@ -217,10 +211,59 @@ export default function Home() {
           </div>
         </section>
 
+        {/* Workshops */}
+        <section className="workshops" id="workshops">
+          <div className="container">
+            <div className="section-head">
+              <div>
+                <p className="eyebrow">Upcoming Workshops</p>
+                <h2 className="section-title">Grab a seat at the next session</h2>
+              </div>
+              <a className="text-link" href="#enroll">
+                No date works? <ArrowRight />
+              </a>
+            </div>
+
+            {sessions.length > 0 ? (
+              <>
+                <div className="workshops-layout">
+                  <WorkshopCalendar workshops={calendarSessions} />
+                  <div className="workshop-list">
+                    {sessions.map((workshop) => (
+                      <WorkshopCard key={workshop.id} workshop={workshop} />
+                    ))}
+                  </div>
+                </div>
+                <p className="workshop-note">
+                  Sessions run in pods of four, with one LEGO kit and one device per pod. Reserve a
+                  seat and we&apos;ll confirm by email before invoicing.
+                </p>
+                <LumaCheckout />
+                <script
+                  type="application/ld+json"
+                  dangerouslySetInnerHTML={{
+                    __html: JSON.stringify(workshopJsonLd(sessions)),
+                  }}
+                />
+              </>
+            ) : (
+              <div className="workshop-empty">
+                <h3>No sessions on the calendar right now</h3>
+                <p>
+                  New workshop dates are added every few weeks. Tell us what your child is into and
+                  we&apos;ll let you know the moment the next one opens.
+                </p>
+                <a className="btn btn-teal" href="#enroll">
+                  Get notified
+                </a>
+              </div>
+            )}
+          </div>
+        </section>
+
         {/* About */}
         <section className="about" id="about">
           <div className="container about-grid">
-            <BearIcon className="watermark" strokeWidth={2} />
             <div className="about-media">
               <Image
                 src="/images/about-kids.png"
@@ -237,9 +280,9 @@ export default function Home() {
                 impactful. Through AI-powered learning and hands-on projects, we help kids become
                 confident problem solvers and innovative thinkers.
               </p>
-              <a className="btn btn-teal" href="#enroll">
+              <Link className="btn btn-teal" href="/about">
                 Learn More About Us <ArrowRight />
-              </a>
+              </Link>
             </div>
           </div>
         </section>
@@ -279,7 +322,7 @@ export default function Home() {
                 </p>
               </div>
               <div className="cta-actions">
-                <a className="btn btn-white" href="#enroll">
+                <a className="btn btn-white" href="#workshops">
                   Enroll Now
                 </a>
                 <a className="btn btn-ghost-white" href="#enroll">
@@ -328,79 +371,7 @@ export default function Home() {
         </section>
       </main>
 
-      {/* Footer */}
-      <footer className="footer">
-        <div className="container">
-          <div className="footer-grid">
-            <div>
-              <a className="brand" href="#top">
-                <Image
-                  className="brand-logo"
-                  src="/images/logo-bytebear-light.png"
-                  alt="ByteBear Academy"
-                  width={352}
-                  height={100}
-                />
-              </a>
-              <p className="footer-blurb">
-                AI-enabled STEM education for kids 6–14. Code. Create. Explore. The future starts
-                here.
-              </p>
-              <div className="socials">
-                <a href="#top" aria-label="Facebook">
-                  <Facebook />
-                </a>
-                <a href="#top" aria-label="Instagram">
-                  <Instagram />
-                </a>
-                <a href="#top" aria-label="YouTube">
-                  <Youtube />
-                </a>
-                <a href="#top" aria-label="LinkedIn">
-                  <Linkedin />
-                </a>
-              </div>
-            </div>
-
-            {Object.entries(footerLinks).map(([heading, links]) => (
-              <div
-                className="footer-col"
-                key={heading}
-                id={heading === "Resources" ? "resources" : undefined}
-              >
-                <h4>{heading}</h4>
-                <ul>
-                  {links.map(([label, href]) => (
-                    <li key={label}>
-                      <a
-                        href={href}
-                        {...(href.startsWith("http")
-                          ? { target: "_blank", rel: "noopener noreferrer" }
-                          : {})}
-                      >
-                        {label}
-                      </a>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ))}
-
-            <div className="newsletter">
-              <h4>Stay Connected</h4>
-              <p>Get updates on classes, events, and resources.</p>
-              <NewsletterForm />
-            </div>
-          </div>
-
-          <div className="footer-bottom">
-            <span>
-              <span aria-hidden="true">🍁</span> Proudly based in Canada
-            </span>
-            <span>© {new Date().getFullYear()} ByteBear Academy. All rights reserved.</span>
-          </div>
-        </div>
-      </footer>
+      <Footer />
     </div>
   );
 }

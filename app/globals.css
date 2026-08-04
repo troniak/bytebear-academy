@@ -12,6 +12,7 @@
   --orange: #f59a23;
   --orange-tint: #fdeedb;
   --pink: #f25c78;
+  --pink-tint: #fde8ec;
   --text: #57628c;
   --surface: #f5f6fc;
   --lavender: #edecfa;
@@ -73,6 +74,17 @@ button {
 
 section {
   scroll-margin-top: 96px;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
 }
 
 /* ---------- Buttons ---------- */
@@ -284,11 +296,13 @@ section {
   font-weight: 600;
 }
 
-.hero-art {
+.hero-art,
+.about-hero-art {
   position: relative;
 }
 
-.hero-art img {
+.hero-art img,
+.about-hero-art img {
   width: 100%;
   height: auto;
   border-radius: var(--radius-lg);
@@ -519,6 +533,347 @@ section {
 .program-link.blue { color: var(--blue); }
 .program-link.orange { color: var(--orange); }
 
+/* ---------- Workshops ---------- */
+
+.workshops {
+  padding: 0.5rem 0 4.5rem;
+}
+
+.workshops-layout {
+  display: grid;
+  grid-template-columns: 316px 1fr;
+  gap: 1.8rem;
+  align-items: start;
+}
+
+.workshop-list {
+  display: grid;
+  gap: 1.4rem;
+}
+
+/* ---------- Workshop calendar ---------- */
+
+.workshop-calendar {
+  position: sticky;
+  top: 100px;
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-card);
+  padding: 1.2rem;
+}
+
+.calendar-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  margin-bottom: 0.9rem;
+}
+
+.calendar-head h3 {
+  font-size: 0.98rem;
+  text-align: center;
+  flex: 1;
+}
+
+.calendar-nav {
+  width: 32px;
+  height: 32px;
+  flex-shrink: 0;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--white);
+  color: var(--navy);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+}
+
+.calendar-nav:hover:not(:disabled) {
+  background: var(--teal-tint);
+  border-color: var(--teal);
+  color: var(--teal);
+}
+
+.calendar-nav:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 0.25rem;
+}
+
+.calendar-weekday {
+  font-family: var(--font-heading), sans-serif;
+  font-size: 0.66rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text);
+  opacity: 0.65;
+  text-align: center;
+  padding-bottom: 0.3rem;
+}
+
+.calendar-day {
+  aspect-ratio: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  border-radius: 10px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.calendar-day.is-empty {
+  visibility: hidden;
+}
+
+.calendar-day.has-session {
+  font-family: var(--font-heading), sans-serif;
+  font-weight: 700;
+  color: var(--navy);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.calendar-day.has-session:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-card);
+}
+
+.calendar-day.has-session:focus-visible {
+  outline: 2px solid var(--teal);
+  outline-offset: 2px;
+}
+
+.calendar-day.has-session.teal { background: var(--teal-tint); box-shadow: inset 0 0 0 1.5px var(--teal); }
+.calendar-day.has-session.purple { background: var(--purple-tint); box-shadow: inset 0 0 0 1.5px var(--purple); }
+.calendar-day.has-session.blue { background: var(--blue-tint); box-shadow: inset 0 0 0 1.5px var(--blue); }
+.calendar-day.has-session.orange { background: var(--orange-tint); box-shadow: inset 0 0 0 1.5px var(--orange); }
+
+.calendar-count {
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  min-width: 16px;
+  height: 16px;
+  padding: 0 4px;
+  border-radius: 999px;
+  background: var(--navy);
+  color: var(--white);
+  font-size: 0.6rem;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.calendar-hint {
+  font-size: 0.76rem;
+  text-align: center;
+  margin-top: 0.9rem;
+  padding-top: 0.8rem;
+  border-top: 1px solid var(--line);
+}
+
+.workshop-card {
+  display: grid;
+  grid-template-columns: 78px 1fr;
+  column-gap: 1.2rem;
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  padding: 1.35rem;
+  box-shadow: var(--shadow-card);
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+
+.workshop-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-pop);
+}
+
+/* Landing point for a calendar day link: clear the sticky header, then flag the card. */
+.workshop-card {
+  scroll-margin-top: 110px;
+}
+
+.workshop-card:target {
+  border-color: var(--teal);
+  box-shadow: 0 0 0 3px var(--teal-tint), var(--shadow-pop);
+}
+
+.workshop-date {
+  grid-column: 1;
+  align-self: start;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: var(--radius-md);
+  padding: 0.65rem 0.4rem 0.55rem;
+  text-align: center;
+}
+
+.workshop-date.teal { background: var(--teal-tint); color: var(--teal); }
+.workshop-date.purple { background: var(--purple-tint); color: var(--purple); }
+.workshop-date.blue { background: var(--blue-tint); color: var(--blue); }
+.workshop-date.orange { background: var(--orange-tint); color: var(--orange); }
+
+.workshop-month {
+  font-family: var(--font-heading), sans-serif;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.workshop-day {
+  font-family: var(--font-heading), sans-serif;
+  font-size: 1.6rem;
+  font-weight: 700;
+  line-height: 1.1;
+  color: var(--navy);
+}
+
+.workshop-weekday {
+  font-size: 0.7rem;
+  font-weight: 700;
+  opacity: 0.85;
+}
+
+.workshop-body {
+  grid-column: 2;
+}
+
+.workshop-unit {
+  font-family: var(--font-heading), sans-serif;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  margin-bottom: 0.3rem;
+}
+
+.workshop-unit.teal { color: var(--teal); }
+.workshop-unit.purple { color: var(--purple); }
+.workshop-unit.blue { color: var(--blue); }
+.workshop-unit.orange { color: var(--orange); }
+
+.workshop-body h3 {
+  font-size: 1.08rem;
+  margin-bottom: 0.45rem;
+}
+
+.workshop-body .desc {
+  font-size: 0.87rem;
+  margin-bottom: 0.9rem;
+}
+
+.workshop-meta {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem 1.1rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.workshop-meta li {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.38rem;
+}
+
+.workshop-meta svg {
+  width: 15px;
+  height: 15px;
+  color: var(--teal);
+  flex-shrink: 0;
+}
+
+.workshop-foot {
+  grid-column: 1 / -1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+  margin-top: 1.15rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--line);
+}
+
+.workshop-foot time {
+  font-family: var(--font-heading), sans-serif;
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--navy);
+}
+
+.workshop-cta {
+  padding: 0.62rem 1.25rem;
+  font-size: 0.78rem;
+}
+
+.workshop-card.is-cancelled {
+  opacity: 0.72;
+}
+
+.workshop-card.is-cancelled:hover {
+  transform: none;
+  box-shadow: var(--shadow-card);
+}
+
+.workshop-cancelled-tag {
+  display: inline-block;
+  margin-left: 0.6rem;
+  padding: 0.1rem 0.5rem;
+  border-radius: 999px;
+  background: var(--pink);
+  color: var(--white);
+  font-size: 0.62rem;
+  letter-spacing: 0.1em;
+}
+
+.workshop-cancelled-note {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--pink);
+}
+
+.workshop-note {
+  text-align: center;
+  font-size: 0.85rem;
+  margin-top: 1.5rem;
+}
+
+.workshop-empty {
+  border: 2px dashed var(--line);
+  border-radius: var(--radius-lg);
+  background: var(--surface);
+  padding: 2.6rem 1.5rem;
+  text-align: center;
+}
+
+.workshop-empty h3 {
+  font-size: 1.15rem;
+  margin-bottom: 0.5rem;
+}
+
+.workshop-empty p {
+  font-size: 0.9rem;
+  max-width: 46ch;
+  margin: 0 auto 1.3rem;
+}
+
 /* ---------- About ---------- */
 
 .about {
@@ -547,17 +902,6 @@ section {
 .about-copy p {
   max-width: 30rem;
   margin-bottom: 1.6rem;
-}
-
-.watermark {
-  position: absolute;
-  right: -1rem;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 190px;
-  height: 180px;
-  color: var(--lavender);
-  z-index: -1;
 }
 
 /* ---------- Stats ---------- */
@@ -669,12 +1013,6 @@ section {
 .testimonial-dots button.active {
   background: var(--purple);
   transform: scale(1.25);
-}
-
-.testimonial-band .watermark {
-  right: 3rem;
-  z-index: 0;
-  color: #e3e2f5;
 }
 
 .testimonial-content {
@@ -1004,11 +1342,306 @@ section {
   font-size: 0.8rem;
 }
 
+/* ---------- About page ---------- */
+
+.about-hero {
+  padding: 3.5rem 0 3rem;
+  background: linear-gradient(180deg, var(--surface) 0%, rgba(245, 246, 252, 0) 100%);
+}
+
+/* Matches .hero-grid so the art sits in the same place on both pages. */
+.about-hero-grid {
+  display: grid;
+  grid-template-columns: 1.05fr 1fr;
+  gap: 3rem;
+  align-items: center;
+}
+
+.about-hero h1 {
+  font-size: clamp(2.1rem, 4.4vw, 3.05rem);
+  font-weight: 800;
+  letter-spacing: -0.015em;
+  margin-bottom: 1.1rem;
+}
+
+.about-hero-copy p.lead {
+  font-size: 1.02rem;
+  max-width: 30rem;
+}
+
+.about-highlights {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.6rem 2rem;
+  margin-top: 2rem;
+}
+
+.about-highlights li {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.about-highlight-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
+  flex-shrink: 0;
+}
+
+.about-highlight-icon svg {
+  width: 20px;
+  height: 20px;
+}
+
+.about-highlight-icon.teal { background: var(--teal-tint); color: var(--teal); }
+.about-highlight-icon.purple { background: var(--purple-tint); color: var(--purple); }
+.about-highlight-icon.blue { background: var(--blue-tint); color: var(--blue); }
+.about-highlight-icon.orange { background: var(--orange-tint); color: var(--orange); }
+
+/* Labels carry a "\n" so they wrap onto two tight lines like the design. */
+.about-highlight-label {
+  white-space: pre-line;
+  font-family: var(--font-heading), sans-serif;
+  font-size: 0.78rem;
+  font-weight: 600;
+  line-height: 1.3;
+  color: var(--navy);
+}
+
+/* ---------- About: mission & vision ---------- */
+
+.about-mission {
+  padding: 2rem 0 3.5rem;
+}
+
+.mission-panel {
+  background: var(--surface);
+  border-radius: var(--radius-lg);
+  padding: 2.6rem;
+  display: grid;
+  grid-template-columns: 0.75fr 1.25fr;
+  gap: 2.6rem;
+  align-items: center;
+}
+
+.mission-art {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: radial-gradient(circle at 50% 50%, var(--lavender) 0%, rgba(237, 236, 250, 0) 72%);
+  padding: 1.5rem;
+}
+
+.mission-art img {
+  width: 100%;
+  height: auto;
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-card);
+}
+
+.mission-copy {
+  display: grid;
+  gap: 1.8rem;
+}
+
+.mission-copy h2 {
+  font-size: 1.18rem;
+  font-weight: 700;
+  margin-bottom: 0.55rem;
+}
+
+.mission-copy .eyebrow {
+  margin-bottom: 0.45rem;
+}
+
+.mission-copy p {
+  font-size: 0.94rem;
+}
+
+/* ---------- About: team ---------- */
+
+.about-team {
+  padding: 1.5rem 0 3.5rem;
+}
+
+.centered-head {
+  text-align: center;
+  max-width: 44rem;
+  margin: 0 auto 2.2rem;
+}
+
+.centered-head p {
+  margin-top: 0.6rem;
+}
+
+.team-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.4rem;
+}
+
+.team-card {
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  padding: 1.8rem 1.4rem;
+  text-align: center;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.team-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-card);
+}
+
+.team-avatar {
+  width: 112px;
+  height: 112px;
+  border-radius: 50%;
+  margin: 0 auto 1rem;
+  object-fit: cover;
+}
+
+.team-monogram {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-heading), sans-serif;
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--navy);
+}
+
+.team-monogram.teal { background: var(--teal-tint); }
+.team-monogram.purple { background: var(--purple-tint); }
+.team-monogram.blue { background: var(--blue-tint); }
+.team-monogram.pink { background: var(--pink-tint); }
+
+.team-card h3 {
+  font-size: 1.02rem;
+  font-weight: 700;
+}
+
+.team-role {
+  color: var(--teal);
+  font-family: var(--font-heading), sans-serif;
+  font-size: 0.82rem;
+  font-weight: 600;
+  margin-bottom: 0.7rem;
+}
+
+.team-bio {
+  font-size: 0.86rem;
+  line-height: 1.55;
+}
+
+/* ---------- About: why families choose us ---------- */
+
+.about-reasons {
+  padding: 1.5rem 0 3.5rem;
+}
+
+/* No subtitle under this one, so let the title run on a single line. */
+.about-reasons .centered-head {
+  max-width: 54rem;
+}
+
+.reason-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 1.6rem;
+}
+
+.reason {
+  text-align: center;
+}
+
+.reason-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 62px;
+  height: 62px;
+  border-radius: 18px;
+  margin-bottom: 1rem;
+}
+
+.reason-icon svg {
+  width: 30px;
+  height: 30px;
+}
+
+.reason-icon.teal { background: var(--teal-tint); color: var(--teal); }
+.reason-icon.purple { background: var(--purple-tint); color: var(--purple); }
+.reason-icon.orange { background: var(--orange-tint); color: var(--orange); }
+.reason-icon.blue { background: var(--blue-tint); color: var(--blue); }
+.reason-icon.pink { background: var(--pink-tint); color: var(--pink); }
+
+.reason h3 {
+  font-size: 0.95rem;
+  font-weight: 700;
+  margin-bottom: 0.4rem;
+}
+
+.reason p {
+  font-size: 0.85rem;
+  line-height: 1.55;
+}
+
+/* ---------- About: closing CTA ---------- */
+
+.about-cta-band {
+  background: linear-gradient(100deg, var(--navy) 0%, #3a2a86 55%, var(--purple-deep) 100%);
+  box-shadow: 0 20px 45px rgba(28, 39, 87, 0.35);
+  align-items: center;
+  padding: 3rem;
+}
+
+.about-cta-band .cta-copy h2 {
+  font-size: 1.85rem;
+}
+
+.about-cta-band .cta-actions {
+  margin-top: 1.6rem;
+}
+
+.about-cta-band .cta-rocket {
+  width: 132px;
+  height: 132px;
+}
+
+.about-cta-band .cta-rocket svg {
+  width: 62px;
+  height: 62px;
+}
+
 /* ---------- Responsive ---------- */
 
 @media (max-width: 1024px) {
   .program-grid {
     grid-template-columns: repeat(2, 1fr);
+  }
+
+  /* Seven nav items no longer fit at 1.9rem between the logo and the CTA. */
+  .nav {
+    gap: 1.15rem;
+  }
+
+  .workshops-layout {
+    grid-template-columns: 1fr;
+  }
+
+  /* Stacked, the calendar shouldn't stretch to full width or stick. */
+  .workshop-calendar {
+    position: static;
+    width: 100%;
+    max-width: 380px;
+    margin-inline: auto;
   }
 
   .trustbar-card {
@@ -1031,6 +1664,15 @@ section {
 
   .footer-grid {
     grid-template-columns: 1fr 1fr;
+  }
+
+  .team-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .reason-grid {
+    grid-template-columns: repeat(3, 1fr);
+    row-gap: 2.2rem;
   }
 }
 
@@ -1067,13 +1709,39 @@ section {
 
   .hero-grid,
   .about-grid,
+  .about-hero-grid,
+  .mission-panel,
   .enroll-grid {
     grid-template-columns: 1fr;
   }
 
-  .hero-art {
+  .hero-art,
+  .about-hero-art {
     order: -1;
     max-width: 520px;
+  }
+
+  .mission-art {
+    max-width: 340px;
+    margin-inline: auto;
+  }
+
+  .mission-panel {
+    padding: 2rem 1.5rem;
+  }
+
+  .about-cta-band {
+    padding: 2.4rem 1.8rem;
+  }
+
+  .about-cta-band .cta-rocket {
+    order: -1;
+    width: 96px;
+    height: 96px;
+  }
+
+  .about-cta-band .cta-actions {
+    justify-content: center;
   }
 
   .section-head {
@@ -1090,10 +1758,6 @@ section {
   .cta-actions {
     flex-wrap: wrap;
     justify-content: center;
-  }
-
-  .watermark {
-    display: none;
   }
 
   .brand-logo,
@@ -1123,6 +1787,22 @@ section {
     grid-template-columns: 1fr;
   }
 
+  .workshop-card {
+    grid-template-columns: 62px 1fr;
+    column-gap: 0.9rem;
+    padding: 1.1rem;
+  }
+
+  .workshop-foot {
+    flex-direction: column;
+    align-items: stretch;
+    text-align: center;
+  }
+
+  .workshop-cta {
+    justify-content: center;
+  }
+
   .footer-grid {
     grid-template-columns: 1fr;
     gap: 1.8rem;
@@ -1131,5 +1811,14 @@ section {
   .footer-bottom {
     flex-direction: column;
     text-align: center;
+  }
+
+  .team-grid,
+  .reason-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .about-highlights {
+    gap: 1.1rem 1.6rem;
   }
 }

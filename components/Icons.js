@@ -82,6 +82,21 @@ export const Rocket = (props) => (
   </svg>
 );
 
+export const Lightbulb = (props) => (
+  <svg viewBox="0 0 24 24" {...base} {...props} aria-hidden="true">
+    <path d="M12 2.8a6.5 6.5 0 0 0-3.8 11.8c.6.4 1 1.1 1 1.9v.5h5.6v-.5c0-.8.4-1.5 1-1.9A6.5 6.5 0 0 0 12 2.8Z" />
+    <path d="M9.8 19.5h4.4M10.6 21.8h2.8" />
+  </svg>
+);
+
+export const Globe = (props) => (
+  <svg viewBox="0 0 24 24" {...base} {...props} aria-hidden="true">
+    <circle cx="12" cy="12" r="9" />
+    <path d="M3.2 9.5h17.6M3.2 14.5h17.6" />
+    <path d="M12 3c-2.4 2.4-3.6 5.4-3.6 9s1.2 6.6 3.6 9c2.4-2.4 3.6-5.4 3.6-9S14.4 5.4 12 3Z" />
+  </svg>
+);
+
 export const GradCap = (props) => (
   <svg viewBox="0 0 24 24" {...base} {...props} aria-hidden="true">
     <path d="m12 4 10.5 4.5L12 13 1.5 8.5 12 4Z" />
@@ -99,6 +114,20 @@ export const Monitor = (props) => (
 export const MapleLeaf = (props) => (
   <svg viewBox="0 0 24 24" {...base} {...props} aria-hidden="true">
     <path d="M12 2.5 13.8 6l2.4-1.2-.7 4 3.3-.7-1.2 3 4 1.4-2.6 2.4 1.2 2.4-4.2-.5.3 4.7H12h-3.5l.3-4.7-4.2.5 1.2-2.4L3.2 12.5l4-1.4-1.2-3 3.3.7-.7-4L11 6l1-3.5Z" />
+  </svg>
+);
+
+export const Clock = (props) => (
+  <svg viewBox="0 0 24 24" {...base} {...props} aria-hidden="true">
+    <circle cx="12" cy="12" r="9" />
+    <path d="M12 6.8V12l3.4 2.2" />
+  </svg>
+);
+
+export const MapPin = (props) => (
+  <svg viewBox="0 0 24 24" {...base} {...props} aria-hidden="true">
+    <path d="M12 21.5c4.5-4.4 7-7.7 7-10.8a7 7 0 1 0-14 0c0 3.1 2.5 6.4 7 10.8Z" />
+    <circle cx="12" cy="10.5" r="2.6" />
   </svg>
 );
 

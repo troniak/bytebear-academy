@@ -1,0 +1,1 @@
+[Hour of AI Activity for Elementary School Students – Binary Logic – K-12 CS/AI Curricula](https://binarylogic.net/hour-of-ai/hourofai-activity-for-elementary-students/)

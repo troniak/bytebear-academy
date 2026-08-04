@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import BearIcon from "./BearIcon";
 
 const quotes = [
   {
@@ -34,7 +33,6 @@ export default function Testimonials() {
     <section className="testimonials" id="testimonials">
       <div className="container">
         <div className="testimonial-band">
-          <BearIcon className="watermark" strokeWidth={2} />
           <div className="testimonial-content">
             <div className="quote-mark" aria-hidden="true">
               “

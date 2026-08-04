@@ -2,24 +2,33 @@
 
 import { useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 
+// Root-relative hrefs so the in-page anchors still resolve from routes other
+// than "/" (e.g. /about).
 const links = [
-  { href: "#top", label: "Home" },
-  { href: "#programs", label: "Programs" },
-  { href: "#about", label: "About" },
-  { href: "#testimonials", label: "Parents" },
-  { href: "#resources", label: "Resources" },
-  { href: "#enroll", label: "Contact" },
+  { href: "/", label: "Home" },
+  { href: "/#programs", label: "Programs" },
+  { href: "/#workshops", label: "Workshops" },
+  { href: "/about", label: "About" },
+  { href: "/#testimonials", label: "Parents" },
+  { href: "/#resources", label: "Resources" },
+  { href: "/#enroll", label: "Contact" },
 ];
 
 export default function Header() {
   const [open, setOpen] = useState(false);
+  const pathname = usePathname();
+
+  // Anchors all live on the home page, so only the plain routes can be "current".
+  const isActive = (href) => !href.includes("#") && href === pathname;
 
   return (
     <header className="header">
       <div className="container">
         <div className="header-inner">
-          <a className="brand" href="#top">
+          <Link className="brand" href="/">
             <Image
               className="brand-logo"
               src="/images/logo-bytebear.png"
@@ -28,20 +37,25 @@ export default function Header() {
               height={100}
               priority
             />
-          </a>
+          </Link>
 
           <nav className="nav" aria-label="Main navigation">
-            {links.map((link, i) => (
-              <a key={link.href} href={link.href} className={i === 0 ? "active" : undefined}>
+            {links.map((link) => (
+              <Link
+                key={link.href}
+                href={link.href}
+                className={isActive(link.href) ? "active" : undefined}
+                aria-current={isActive(link.href) ? "page" : undefined}
+              >
                 {link.label}
-              </a>
+              </Link>
             ))}
           </nav>
 
           <div className="header-cta">
-            <a className="btn btn-purple" href="#enroll">
+            <Link className="btn btn-purple" href="/#workshops">
               Enroll Now
-            </a>
+            </Link>
             <button
               className="nav-toggle"
               aria-expanded={open}
@@ -58,13 +72,13 @@ export default function Header() {
         {open && (
           <nav className="mobile-nav" aria-label="Mobile navigation">
             {links.map((link) => (
-              <a key={link.href} href={link.href} onClick={() => setOpen(false)}>
+              <Link key={link.href} href={link.href} onClick={() => setOpen(false)}>
                 {link.label}
-              </a>
+              </Link>
             ))}
-            <a className="btn btn-purple" href="#enroll" onClick={() => setOpen(false)}>
+            <Link className="btn btn-purple" href="/#workshops" onClick={() => setOpen(false)}>
               Enroll Now
-            </a>
+            </Link>
           </nav>
         )}
       </div>

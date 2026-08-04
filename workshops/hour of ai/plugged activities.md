@@ -1,0 +1,1 @@
+[Hour of AI Activities](https://csforall.org/en-US/activities/hour-of-ai?term=&)

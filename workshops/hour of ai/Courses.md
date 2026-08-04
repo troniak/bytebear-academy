@@ -1,0 +1,1 @@
+[AI Literacy Course for Everyone | Learn AI in 6 Weeks | MyAI101](https://myai101.com/hourofai/gpt2)
