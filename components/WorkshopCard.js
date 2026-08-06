@@ -1,5 +1,5 @@
 import { WORKSHOP_TIME_ZONE } from "@/data/workshop-config";
-import { Clock, Users, MapPin, Cube } from "@/components/Icons";
+import { Clock, Users, MapPin, Cube, Ticket } from "@/components/Icons";
 
 // Explicit timeZone: the server runs in UTC, so an unpinned formatter would
 // render the wrong local time for a Toronto session.
@@ -12,11 +12,38 @@ const weekdayFormat = part({ weekday: "short" });
 const timeFormat = part({ hour: "numeric", minute: "2-digit", timeZoneName: "short" });
 const fullDateFormat = part({ weekday: "long", month: "long", day: "numeric" });
 
+/**
+ * "From $45" — from, because a session can also carry sibling, group or course
+ * tickets that cost more than the cheapest one Bookwhen reports.
+ */
+function priceLabel(price) {
+  if (price.amount === 0) return "Free";
+
+  const amount = new Intl.NumberFormat("en-CA", {
+    style: "currency",
+    currency: price.currency,
+    // Whole-dollar prices read better without the trailing ".00".
+    minimumFractionDigits: Number.isInteger(price.amount) ? 0 : 2,
+  }).format(price.amount);
+
+  return `From ${amount}`;
+}
+
+/**
+ * Seats come straight from Bookwhen, so the card can say how full a session
+ * actually is. Capacity is null when the organiser set no cap at all.
+ */
+function seatsLabel({ capacity, seatsLeft }) {
+  if (capacity === null) return null;
+  if (seatsLeft === 0) return "Fully booked";
+  if (seatsLeft <= 4) return `Only ${seatsLeft} of ${capacity} seats left`;
+  return `${seatsLeft} of ${capacity} seats left · pods of 4`;
+}
+
 export default function WorkshopCard({ workshop }) {
   const {
     id,
-    lumaEventId,
-    lumaUrl,
+    bookUrl,
     unit,
     title,
     accent,
@@ -25,12 +52,17 @@ export default function WorkshopCard({ workshop }) {
     startsAt,
     location,
     capacity,
+    seatsLeft,
+    waitingList,
+    price,
     blurb,
     status,
   } = workshop;
 
   const date = new Date(startsAt);
   const cancelled = status === "cancelled";
+  const full = capacity !== null && seatsLeft === 0;
+  const seats = seatsLabel({ capacity, seatsLeft });
 
   return (
     <article
@@ -44,26 +76,41 @@ export default function WorkshopCard({ workshop }) {
       </div>
 
       <div className="workshop-body">
-        <p className={`workshop-unit ${accent}`}>
-          {unit}
-          {cancelled && <span className="workshop-cancelled-tag">Cancelled</span>}
-        </p>
+        {(unit || cancelled) && (
+          <p className={`workshop-unit ${accent}`}>
+            {unit}
+            {cancelled && <span className="workshop-cancelled-tag">Cancelled</span>}
+          </p>
+        )}
         <h3>{title}</h3>
-        <p className="desc">{blurb}</p>
+        {blurb && <p className="desc">{blurb}</p>}
 
         <ul className="workshop-meta">
-          <li>
-            <Clock /> {durationHours} hours
-          </li>
-          <li>
-            <Users /> {ages}
-          </li>
-          <li>
-            <MapPin /> {location}
-          </li>
-          <li>
-            <Cube /> {capacity} seats · pods of 4
-          </li>
+          {durationHours && (
+            <li>
+              <Clock /> {durationHours} hours
+            </li>
+          )}
+          {ages && (
+            <li>
+              <Users /> {ages}
+            </li>
+          )}
+          {location && (
+            <li>
+              <MapPin /> {location}
+            </li>
+          )}
+          {price && (
+            <li>
+              <Ticket /> {priceLabel(price)}
+            </li>
+          )}
+          {seats && (
+            <li>
+              <Cube /> {seats}
+            </li>
+          )}
         </ul>
       </div>
 
@@ -75,17 +122,15 @@ export default function WorkshopCard({ workshop }) {
         {cancelled ? (
           <p className="workshop-cancelled-note">This session has been cancelled.</p>
         ) : (
-          /* href is a real fallback: if embed.lu.ma is blocked the button still
-             opens the Luma event page instead of dead-clicking. */
+          /* Bookwhen's own page handles the booking — it holds the seat and
+             takes payment, so it stays the one place a booking can happen. */
           <a
             className="btn btn-teal workshop-cta"
-            href={lumaUrl}
+            href={bookUrl}
             target="_blank"
             rel="noopener noreferrer"
-            data-luma-action="checkout"
-            data-luma-event-id={lumaEventId}
           >
-            Reserve a seat
+            {full ? (waitingList ? "Join the waiting list" : "Fully booked") : "Reserve a seat"}
             <span className="sr-only"> for {title}</span>
           </a>
         )}

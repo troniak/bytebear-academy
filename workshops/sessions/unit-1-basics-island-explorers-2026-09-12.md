@@ -1,19 +1,26 @@
 ---
+# ── Identity ────────────────────────────────────────────────
 id: unit-1-basics-island-explorers-2026-09-12
-unit: Unit 1 · Basics
-title: Island Explorers
+unit: "Unit 1 · Basics"
+title: "Island Explorers"
 accent: teal
-planPath: workshops/Computer Science & AI 8+/Unit 1 - Basics - Island Explorers.md
-lumaEventId: REPLACE-ME
-lumaUrl: REPLACE-ME
-startsAt: 2026-09-12T10:00:00-04:00
-durationHours: 2
-location: ByteBear Studio — Toronto, ON
-isOnline: false
-ages: Ages 8–11
-capacity: 12
+planPath: "workshops/Computer Science & AI 8+/Unit 1 - Basics - Island Explorers.md"
+ages: "Ages 8–11"
+
+# ── Bookwhen ────────────────────────────────────────────────
+# The event on bookwhen.com/bytebear that this file describes. Bookwhen owns
+# the date, the seats, the price and the booking link; this file only supplies
+# the copy wrapped around them.
+# The ID is the last part of the event's URL: bookwhen.com/bytebear/e/<id>
+bookwhenEventId: "REPLACE-ME"
+
+# ── Publishing ──────────────────────────────────────────────
+# draft → off the site entirely, even once the Bookwhen event is live
+# scheduled → shown on the site, using this file's copy
+# cancelled → shown as cancelled, tells Google the event is off
 status: draft
-blurb: First steps in block coding. Teams plan a route, program a sequence, then make hardware and software work together in a colour-and-motion dance.
+
+blurb: "First steps in block coding. Teams plan a route, program a sequence, then make hardware and software work together in a colour-and-motion dance."
 ---
 
 ## What we'll build

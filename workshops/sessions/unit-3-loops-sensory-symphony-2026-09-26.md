@@ -5,29 +5,18 @@ unit: "Unit 3 · Loops"
 title: "Sensory Symphony"
 accent: purple
 planPath: "workshops/Computer Science & AI 8+/Unit 3 - Loops - Sensory Symphony.md"
-
-# ── Luma ────────────────────────────────────────────────────
-# Fill both in AFTER creating the event, from
-# Manage → More → Embed Registration Button.
-lumaEventId: "REPLACE-ME"
-lumaUrl: "REPLACE-ME"
-
-# ── Scheduling ──────────────────────────────────────────────
-# startsAt must be a full ISO timestamp with offset.
-#   -04:00 = EDT (Mar–Nov)   ·   -05:00 = EST (Nov–Mar)
-# durationHours: 2 = core workshop, 4 = core + lunch + extension.
-startsAt: "2026-09-26T10:00:00-04:00"
-durationHours: 2
-location: "ByteBear Studio — Toronto, ON"
-isOnline: false
-
-# ── Audience & capacity ─────────────────────────────────────
 ages: "Ages 8–11"
-capacity: 12
+
+# ── Bookwhen ────────────────────────────────────────────────
+# The event on bookwhen.com/bytebear that this file describes. Bookwhen owns
+# the date, the seats, the price and the booking link; this file only supplies
+# the copy wrapped around them.
+# The ID is the last part of the event's URL: bookwhen.com/bytebear/e/<id>
+bookwhenEventId: "REPLACE-ME"
 
 # ── Publishing ──────────────────────────────────────────────
-# draft → not on the site (safe while Luma fields are placeholders)
-# scheduled → live and bookable
+# draft → off the site entirely, even once the Bookwhen event is live
+# scheduled → shown on the site, using this file's copy
 # cancelled → shown as cancelled, tells Google the event is off
 status: draft
 

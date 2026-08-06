@@ -131,6 +131,13 @@ export const MapPin = (props) => (
   </svg>
 );
 
+export const Ticket = (props) => (
+  <svg viewBox="0 0 24 24" {...base} {...props} aria-hidden="true">
+    <path d="M3 9.2V6.5a1.5 1.5 0 0 1 1.5-1.5h15A1.5 1.5 0 0 1 21 6.5v2.7a2.8 2.8 0 0 0 0 5.6v2.7a1.5 1.5 0 0 1-1.5 1.5h-15A1.5 1.5 0 0 1 3 17.5v-2.7a2.8 2.8 0 0 0 0-5.6Z" />
+    <path d="M14 5v3M14 16v3" />
+  </svg>
+);
+
 export const Check = (props) => (
   <svg viewBox="0 0 24 24" {...base} strokeWidth={3} {...props} aria-hidden="true">
     <path d="m4.5 12.5 5 5 10-11" />

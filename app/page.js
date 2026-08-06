@@ -4,7 +4,6 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import Testimonials from "@/components/Testimonials";
 import EnrollForm from "@/components/EnrollForm";
-import LumaCheckout from "@/components/LumaCheckout";
 import WorkshopCard from "@/components/WorkshopCard";
 import WorkshopCalendar from "@/components/WorkshopCalendar";
 import { upcomingWorkshops, workshopJsonLd } from "@/lib/workshops";
@@ -94,12 +93,13 @@ const stats = [
   { icon: <MapleLeaf />, value: "Across Canada", label: "Online & In-Person", pink: true },
 ];
 
-// The upcoming-session filter runs at render time, so refresh the static page
-// hourly rather than freezing "upcoming" at build time.
+// Sessions come from the Bookwhen API, so the page has to be refreshed rather
+// than frozen at build time — this keeps dates and seat counts roughly an hour
+// fresh at most.
 export const revalidate = 3600;
 
-export default function Home() {
-  const sessions = upcomingWorkshops();
+export default async function Home() {
+  const sessions = await upcomingWorkshops();
 
   // The calendar is a client component, so anything handed to it is serialized
   // into the HTML. Send only the four fields it renders — otherwise every
@@ -235,10 +235,10 @@ export default function Home() {
                   </div>
                 </div>
                 <p className="workshop-note">
-                  Sessions run in pods of four, with one LEGO kit and one device per pod. Reserve a
-                  seat and we&apos;ll confirm by email before invoicing.
+                  Sessions run in pods of four, with one LEGO kit and one device per pod. Booking is
+                  handled on Bookwhen — you&apos;ll get a confirmation email as soon as your seat is
+                  held.
                 </p>
-                <LumaCheckout />
                 <script
                   type="application/ld+json"
                   dangerouslySetInnerHTML={{

@@ -1,61 +1,67 @@
 # Workshop Sessions
 
-One `.md` file per bookable session (this README aside). **These files are the source of
-truth** — the website
-reads them, and they are the script you follow when creating the matching Luma event.
+The workshops section of the site is built from two sources, joined on `bookwhenEventId`:
 
-Frontmatter drives the site. The body is the parent-facing description to paste into Luma.
+- **[bookwhen.com/bytebear](https://bookwhen.com/bytebear)** is the source of truth for
+  anything that moves — the date and time, the location, seats left, the price, and the
+  booking link. The site reads it live through the
+  [Bookwhen API](https://api.bookwhen.com/v2) on an hourly refresh, so a seat sold or a
+  time changed shows up on the site without a deploy.
+- **One `.md` file here per session** (this README aside) supplies the copy Bookwhen has
+  nowhere to put: the unit label, the accent colour, the age range and the card blurb.
+  The body is the parent-facing description to paste into the Bookwhen event.
+
+That split is the point: you never type a date in two places.
 
 ## Creating a session
 
-1. **Copy the nearest existing file.** Six 2-hour drafts exist, one per unit of the
+1. **Create the event in Bookwhen** — date, time, location, capacity, tickets and price.
+   Paste the body of the matching `.md` file in as the event description.
+2. **Copy the file** nearest to what you're running. Six drafts exist, one per unit of the
    [Computer Science & AI 8+](../Computer%20Science%20&%20AI%208+/README.md) sequence.
-   Filenames and `id`s are date-stamped (`<unit-slug>-<YYYY-MM-DD>.md`) because a unit
-   gets run more than once — each run is its own file with its own `id`.
-2. **Set the schedule** — `startsAt`, `durationHours`, `location`, `isOnline`, `capacity`.
-   For the 4-hour modality, set `durationHours: 4`; the body text already describes what
-   the extension adds.
-3. **Create the Luma event** using the body of this file as the event description, and the
-   frontmatter for date, capacity and location.
-4. **Paste the Luma values back** into `lumaEventId` and `lumaUrl`, from
-   Manage → More → Embed Registration Button.
-5. **Flip `status` to `scheduled`.** It is now live on the site.
+   Filenames and `id`s are date-stamped (`<unit-slug>-<YYYY-MM-DD>.md`) because a unit gets
+   run more than once — each run is its own file with its own `id`. The date in the name is
+   a label for you; the real date always comes from Bookwhen.
+3. **Paste the Bookwhen event ID** into `bookwhenEventId`. It's the last part of the event's
+   URL: `bookwhen.com/bytebear/e/ev-abcd-20260912100000`.
+4. **Flip `status` to `scheduled`.** It is now live on the site.
 
 ## Fields
 
 | Field | Notes |
 | --- | --- |
 | `id` | Stable and unique. Becomes the `#workshop-<id>` anchor the calendar links to. Don't reuse. |
-| `unit`, `title` | Shown on the card. |
+| `unit`, `title` | Shown on the card. `title` overrides the Bookwhen event title. |
 | `accent` | `teal`, `purple`, `blue` or `orange`. Colours the date badge and the calendar square. |
 | `planPath` | The teacher-facing plan this session delivers. Not used by the site. |
-| `lumaEventId` | Drives the in-page checkout overlay. |
-| `lumaUrl` | Fallback when Luma's script is blocked, **and** the event URL published to Google. |
-| `startsAt` | Full ISO timestamp with offset. `-04:00` = EDT (Mar–Nov), `-05:00` = EST (Nov–Mar). |
-| `durationHours` | `2` = core workshop. `4` = core + lunch + extension. |
-| `location`, `isOnline` | `isOnline` picks the right schema.org location type. |
-| `ages`, `capacity` | Capacity should be a multiple of 4 — students work in pods of four. |
+| `ages` | Shown on the card. Bookwhen has no field for it. |
+| `bookwhenEventId` | The join key. Nothing renders without a matching Bookwhen event. |
 | `status` | `draft`, `scheduled` or `cancelled`. See below. |
 | `blurb` | One or two sentences on the card. Keep it short; the body carries the detail. |
+| `isOnline` | Optional. Only set it to override the default, which is "online if the Bookwhen event has no location pinned". Picks the schema.org location type. |
+
+Date, duration, location, capacity, seats left and price are **not** fields here — they come
+from Bookwhen.
 
 ## Status
 
-- **`draft`** — invisible on the site. Placeholder Luma fields are allowed, which is why new
-  sessions start here. Commit freely.
-- **`scheduled`** — live and bookable. The build **fails** if any Luma field, `startsAt` or
-  `location` is still `REPLACE-ME` or `TBD`, so a half-finished session cannot ship.
+- **`draft`** — off the site entirely, even if the Bookwhen event is already public. A
+  placeholder `bookwhenEventId` is allowed, which is why new sessions start here.
+- **`scheduled`** — live, using this file's copy. The build **fails** if `bookwhenEventId` is
+  still `REPLACE-ME` or `TBD`, so a file that could never match anything cannot ship.
 - **`cancelled`** — the card stays up, marked cancelled with no booking button, and the
   structured data tells Google `EventCancelled`. Use this rather than deleting the file, so
-  anyone who already booked sees that it's off.
+  anyone who already booked sees that it's off. Cancel it in Bookwhen too, or the card and
+  the booking page will disagree.
 
-Sessions disappear from the site automatically once their start time passes. There is no need
-to prune old files, though deleting them keeps this directory readable.
+Sessions disappear from the site automatically once their start time passes.
 
-## Keeping in sync with Luma
+## Events without a file
 
-Luma is authoritative at the moment of booking — its overlay always shows the real date and
-real remaining seats. These files are authoritative for discovery: what parents find, what the
-calendar shows, and what Google publishes.
+An event on the Bookwhen schedule with no `.md` file here **still appears on the site** — it
+is bookable right now, so hiding it would advertise less than we actually sell. It just
+renders plainer: Bookwhen's own title, a blurb trimmed from the event details, an accent
+picked from the event ID, and no unit label or age range.
 
-So **change it in Luma, then immediately edit the file here.** Doing one without the other
-means the site advertises something Luma no longer offers.
+So the way to take something off the site is to unpublish it in Bookwhen, or add a file with
+`status: draft`. Adding a file is never required — only better.

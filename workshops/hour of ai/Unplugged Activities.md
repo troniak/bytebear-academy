@@ -13,7 +13,3 @@ k-2
 [What is AI? For Early Childhood Resources - Google Drive](https://drive.google.com/drive/folders/1H5kg6u8lKXFyXEJCrysqiCmaYSg-B1xi)
 
 
-
-code-yogi
-[AI Basics](https://ai-basics.codeyogi.org/)
-[AI for Farmers](https://ai-for-farmers.codeyogi.org/#/home)
