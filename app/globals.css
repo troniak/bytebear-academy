@@ -1822,3 +1822,113 @@ section {
     gap: 1.1rem 1.6rem;
   }
 }
+
+/* ── Bookwhen hand-off ───────────────────────────────────────
+   Shown in the new tab while Bookwhen boots, so the wait is a
+   ByteBear screen rather than a blank one. */
+
+.handoff {
+  min-height: 100dvh;
+  display: grid;
+  place-items: center;
+  padding: 1.5rem;
+  background: var(--surface);
+}
+
+.handoff-card {
+  width: min(100%, 26rem);
+  padding: 2.6rem 2rem 2.2rem;
+  border-radius: var(--radius-lg);
+  background: var(--white);
+  box-shadow: var(--shadow-card);
+  text-align: center;
+}
+
+.handoff-mark {
+  height: auto;
+  max-width: 148px;
+}
+
+.handoff-track {
+  width: 180px;
+  height: 6px;
+  margin: 1.5rem auto 1.2rem;
+  border-radius: 999px;
+  background: var(--line);
+  overflow: hidden;
+}
+
+.handoff-track::after {
+  content: "";
+  display: block;
+  width: 45%;
+  height: 100%;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--teal), var(--purple));
+  animation: handoff-slide 1.15s ease-in-out infinite;
+}
+
+@keyframes handoff-slide {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(222%);
+  }
+}
+
+.handoff-status {
+  font-family: var(--font-heading), sans-serif;
+  font-size: 1.02rem;
+  font-weight: 700;
+  color: var(--navy);
+}
+
+/* Animating `content` is ignored by older engines, which simply leaves the
+   sentence without its trailing dots — no layout shift either way. */
+.handoff-dots::after {
+  content: "";
+  animation: handoff-dots 1.6s steps(1) infinite;
+}
+
+@keyframes handoff-dots {
+  0% {
+    content: "";
+  }
+  25% {
+    content: ".";
+  }
+  50% {
+    content: "..";
+  }
+  75% {
+    content: "...";
+  }
+}
+
+.handoff-note {
+  margin-top: 0.4rem;
+  font-size: 0.87rem;
+}
+
+.handoff-fallback {
+  display: inline-block;
+  margin-top: 1.5rem;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--teal);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .handoff-track::after {
+    width: 100%;
+    animation: none;
+  }
+
+  .handoff-dots::after {
+    content: "…";
+    animation: none;
+  }
+}

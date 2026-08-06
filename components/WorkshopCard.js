@@ -43,7 +43,7 @@ function seatsLabel({ capacity, seatsLeft }) {
 export default function WorkshopCard({ workshop }) {
   const {
     id,
-    bookUrl,
+    bookwhenEventId,
     unit,
     title,
     accent,
@@ -123,10 +123,13 @@ export default function WorkshopCard({ workshop }) {
           <p className="workshop-cancelled-note">This session has been cancelled.</p>
         ) : (
           /* Bookwhen's own page handles the booking — it holds the seat and
-             takes payment, so it stays the one place a booking can happen. */
+             takes payment, so it stays the one place a booking can happen. The
+             new tab goes to our hand-off screen first, which redirects on
+             arrival: Bookwhen takes seconds to boot, and this way that wait is
+             a ByteBear screen instead of a blank tab. */
           <a
             className="btn btn-teal workshop-cta"
-            href={bookUrl}
+            href={`/booking/${bookwhenEventId}`}
             target="_blank"
             rel="noopener noreferrer"
           >
