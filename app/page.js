@@ -4,8 +4,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import Testimonials from "@/components/Testimonials";
 import EnrollForm from "@/components/EnrollForm";
-import WorkshopCard from "@/components/WorkshopCard";
-import WorkshopCalendar from "@/components/WorkshopCalendar";
+import WorkshopBrowser from "@/components/WorkshopBrowser";
 import { upcomingWorkshops, workshopJsonLd } from "@/lib/workshops";
 import {
   ArrowRight,
@@ -94,22 +93,13 @@ const stats = [
 ];
 
 // Sessions come from the Bookwhen API, so the page has to be refreshed rather
-// than frozen at build time — this keeps dates and seat counts roughly an hour
-// fresh at most.
-export const revalidate = 3600;
+// than frozen at build time — this keeps dates and seat counts no more than
+// five minutes stale. Keep it in step with REVALIDATE_SECONDS in lib/bookwhen.js:
+// the page can only be as fresh as the fetch behind it.
+export const revalidate = 300;
 
 export default async function Home() {
   const sessions = await upcomingWorkshops();
-
-  // The calendar is a client component, so anything handed to it is serialized
-  // into the HTML. Send only the four fields it renders — otherwise every
-  // session's full markdown body ships to the browser unused.
-  const calendarSessions = sessions.map(({ id, startsAt, title, accent }) => ({
-    id,
-    startsAt,
-    title,
-    accent,
-  }));
 
   return (
     <div id="top">
@@ -226,14 +216,7 @@ export default async function Home() {
 
             {sessions.length > 0 ? (
               <>
-                <div className="workshops-layout">
-                  <WorkshopCalendar workshops={calendarSessions} />
-                  <div className="workshop-list">
-                    {sessions.map((workshop) => (
-                      <WorkshopCard key={workshop.id} workshop={workshop} />
-                    ))}
-                  </div>
-                </div>
+                <WorkshopBrowser workshops={sessions} />
                 <p className="workshop-note">
                   Sessions run in pods of four, with one LEGO kit and one device per pod. Booking is
                   handled on Bookwhen — you&apos;ll get a confirmation email as soon as your seat is

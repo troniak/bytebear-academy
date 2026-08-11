@@ -539,6 +539,81 @@ section {
   padding: 0.5rem 0 4.5rem;
 }
 
+.workshop-filter {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.6rem 0.9rem;
+  margin-bottom: 1.5rem;
+}
+
+.workshop-filter-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-family: var(--font-heading), sans-serif;
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--navy);
+}
+
+.workshop-filter-label svg {
+  width: 16px;
+  height: 16px;
+  color: var(--teal);
+}
+
+.workshop-filter-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.workshop-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-family: inherit;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--text);
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 0.35rem 0.9rem;
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+}
+
+.workshop-chip:hover {
+  border-color: var(--teal);
+  color: var(--teal);
+}
+
+.workshop-chip[aria-pressed="true"] {
+  background: var(--teal);
+  border-color: var(--teal);
+  color: var(--white);
+}
+
+.workshop-chip:focus-visible {
+  outline: 2px solid var(--teal);
+  outline-offset: 2px;
+}
+
+.workshop-chip-count {
+  font-size: 0.75rem;
+  opacity: 0.65;
+}
+
+/* Pushed to the end of the row so the chips stay together. */
+.workshop-filter-count {
+  margin-left: auto;
+  font-size: 0.82rem;
+}
+
 .workshops-layout {
   display: grid;
   grid-template-columns: 316px 1fr;
@@ -1791,6 +1866,11 @@ section {
     grid-template-columns: 62px 1fr;
     column-gap: 0.9rem;
     padding: 1.1rem;
+  }
+
+  /* Too narrow to sit the count opposite the chips — let it wrap under them. */
+  .workshop-filter-count {
+    margin-left: 0;
   }
 
   .workshop-foot {
