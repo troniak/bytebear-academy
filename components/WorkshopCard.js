@@ -88,7 +88,7 @@ export default function WorkshopCard({ workshop }) {
         <ul className="workshop-meta">
           {durationHours && (
             <li>
-              <Clock /> {durationHours} hours
+              <Clock /> {Math.round(durationHours * 60)} minutes
             </li>
           )}
           {ages && (

@@ -18,7 +18,7 @@ const nunito = Nunito({
 export const metadata = {
   title: "ByteBear Academy | AI-Enabled STEM Education for Kids 6–14",
   description:
-    "AI-enabled STEM education for kids 6–14. ByteBear Academy inspires the next generation of creators, problem solvers, and innovators — proudly based in Canada.",
+    "AI-enabled STEM education for kids 6–14. ByteBear Academy inspires the next generation of creators, problem solvers, and innovators.",
 };
 
 export default function RootLayout({ children }) {

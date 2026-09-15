@@ -19,7 +19,6 @@ import {
   Rocket,
   GradCap,
   Monitor,
-  MapleLeaf,
   Check,
 } from "@/components/Icons";
 
@@ -89,7 +88,6 @@ const stats = [
   { icon: <Users />, value: "1,200+", label: "Students Empowered" },
   { icon: <GradCap />, value: "50+", label: "Expert Instructors" },
   { icon: <Monitor />, value: "100+", label: "Projects Completed" },
-  { icon: <MapleLeaf />, value: "Across Canada", label: "Online & In-Person", pink: true },
 ];
 
 // Sessions come from the Bookwhen API, so the page has to be refreshed rather
@@ -128,8 +126,6 @@ export default async function Home() {
                 </a>
               </div>
               <p className="hero-canada">
-                <span aria-hidden="true">🍁</span> Proudly based in Canada
-                <span className="divider">|</span>
                 <span className="muted">Serving families coast to coast</span>
               </p>
             </div>

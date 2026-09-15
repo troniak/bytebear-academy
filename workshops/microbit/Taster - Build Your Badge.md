@@ -5,18 +5,18 @@ working, personalised program they wrote themselves, and every parent leaves kno
 [Maker Level](../../docs/ByteBear%20Academy%20Curriculum%20Framework%20-%20Explorer%20to%20Leader%20Robotics,%20AI,%20and%20Physical%20Computing.md)
 is and how to book it.
 
-| | |
-| --- | --- |
-| **Ages** | 8-11 |
-| **Length** | 50 minutes, door to door. The child-facing portion is the first 45. |
-| **Format** | Live online, video call. Cameras optional, chat essential. |
-| **Group size** | 12-25 children. Above 25, add a second chat moderator. |
-| **Staffing** | Host + chat moderator. Two people. Never run this solo. |
-| **Platform** | [makecode.microbit.org](https://makecode.microbit.org) — free, browser-based, no login, no download. |
-| **Hardware** | None for families. The host holds a physical micro:bit v2 on camera. |
-| **Outcome** | A personalised badge program running in the MakeCode simulator. |
-| **Conversion goal** | Maker Level bookings taken by the stated deadline. |
-| **Slides** | [Build Your Badge — presenter deck](https://docs.google.com/presentation/d/1ef7cu59UF1lYFKm8gXgaEEuVgMS6zQOOngpAWlY_pJ4/edit) · 24 slides. Source: `Build Your Badge - deck.pptx` in this folder. |
+|                     |                                                                                                                                                                                                   |
+| ------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Ages**            | 8-11                                                                                                                                                                                              |
+| **Length**          | 50 minutes, door to door. The child-facing portion is the first 45.                                                                                                                               |
+| **Format**          | Live online, video call. Cameras optional, chat essential.                                                                                                                                        |
+| **Group size**      | 12-25 children. Above 25, add a second chat moderator.                                                                                                                                            |
+| **Staffing**        | Host + chat moderator. Two people. Never run this solo.                                                                                                                                           |
+| **Platform**        | [makecode.microbit.org](https://makecode.microbit.org) — free, browser-based, no login, no download.                                                                                              |
+| **Hardware**        | None for families. The host holds a physical micro:bit v2 on camera.                                                                                                                              |
+| **Outcome**         | A personalised badge program running in the MakeCode simulator.                                                                                                                                   |
+| **Conversion goal** | Maker Level bookings taken by the stated deadline.                                                                                                                                                |
+| **Slides**          | [Build Your Badge — presenter deck](https://docs.google.com/presentation/d/1ef7cu59UF1lYFKm8gXgaEEuVgMS6zQOOngpAWlY_pJ4/edit) · 24 slides. Source: `Build Your Badge - deck.pptx` in this folder. |
 
 ## Why this shape works
 

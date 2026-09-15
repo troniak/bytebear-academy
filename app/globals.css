@@ -287,10 +287,6 @@ section {
   color: var(--navy);
 }
 
-.hero-canada .divider {
-  color: var(--line);
-}
-
 .hero-canada .muted {
   color: var(--text);
   font-weight: 600;
@@ -989,7 +985,7 @@ section {
   background: var(--navy-soft);
   border-radius: var(--radius-lg);
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   padding: 2rem 1rem;
 }
 
@@ -1412,7 +1408,7 @@ section {
   padding: 1.3rem 0;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
   gap: 1rem;
   font-size: 0.8rem;
 }

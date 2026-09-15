@@ -92,9 +92,6 @@ export default function Footer() {
         </div>
 
         <div className="footer-bottom">
-          <span>
-            <span aria-hidden="true">🍁</span> Proudly based in Canada
-          </span>
           <span>© {new Date().getFullYear()} ByteBear Academy. All rights reserved.</span>
         </div>
       </div>
