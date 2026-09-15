@@ -1,5 +1,5 @@
 import { WORKSHOP_TIME_ZONE } from "@/data/workshop-config";
-import { Clock, Users, MapPin, Cube, Ticket } from "@/components/Icons";
+import { Calendar, Clock, Users, MapPin, Cube, Ticket } from "@/components/Icons";
 
 // Explicit timeZone: the server runs in UTC, so an unpinned formatter would
 // render the wrong local time for a Toronto session.
@@ -11,12 +11,15 @@ const dayFormat = part({ day: "numeric" });
 const weekdayFormat = part({ weekday: "short" });
 const timeFormat = part({ hour: "numeric", minute: "2-digit", timeZoneName: "short" });
 const fullDateFormat = part({ weekday: "long", month: "long", day: "numeric" });
+const monthDayFormat = part({ month: "short", day: "numeric" });
 
 /**
  * "From $45" — from, because a session can also carry sibling, group or course
- * tickets that cost more than the cheapest one Bookwhen reports.
+ * tickets that cost more than the cheapest one Bookwhen reports. A course
+ * ticket covers every date in the series, so say so: the same number against a
+ * single date reads as the price of one morning.
  */
-function priceLabel(price) {
+function priceLabel(price, isCourse) {
   if (price.amount === 0) return "Free";
 
   const amount = new Intl.NumberFormat("en-CA", {
@@ -26,7 +29,18 @@ function priceLabel(price) {
     minimumFractionDigits: Number.isInteger(price.amount) ? 0 : 2,
   }).format(price.amount);
 
-  return `From ${amount}`;
+  return isCourse ? `From ${amount} for the whole course` : `From ${amount}`;
+}
+
+/** "8 weekly sessions · Oct 7 – Nov 25" */
+function scheduleLabel({ sessionCount, cadence, startsAt, lastSessionAt }) {
+  if (sessionCount < 2) return null;
+
+  const run = `${monthDayFormat.format(new Date(startsAt))} – ${monthDayFormat.format(
+    new Date(lastSessionAt)
+  )}`;
+
+  return `${sessionCount}${cadence === "weekly" ? " weekly" : ""} sessions · ${run}`;
 }
 
 /**
@@ -57,12 +71,17 @@ export default function WorkshopCard({ workshop }) {
     price,
     blurb,
     status,
+    isCourse,
+    sessionCount,
+    lastSessionAt,
+    cadence,
   } = workshop;
 
   const date = new Date(startsAt);
   const cancelled = status === "cancelled";
   const full = capacity !== null && seatsLeft === 0;
   const seats = seatsLabel({ capacity, seatsLeft });
+  const schedule = scheduleLabel({ sessionCount, cadence, startsAt, lastSessionAt });
 
   return (
     <article
@@ -86,9 +105,15 @@ export default function WorkshopCard({ workshop }) {
         {blurb && <p className="desc">{blurb}</p>}
 
         <ul className="workshop-meta">
+          {schedule && (
+            <li>
+              <Calendar /> {schedule}
+            </li>
+          )}
           {durationHours && (
             <li>
               <Clock /> {Math.round(durationHours * 60)} minutes
+              {schedule ? " a session" : ""}
             </li>
           )}
           {ages && (
@@ -103,7 +128,7 @@ export default function WorkshopCard({ workshop }) {
           )}
           {price && (
             <li>
-              <Ticket /> {priceLabel(price)}
+              <Ticket /> {priceLabel(price, isCourse)}
             </li>
           )}
           {seats && (
@@ -133,7 +158,13 @@ export default function WorkshopCard({ workshop }) {
             target="_blank"
             rel="noopener noreferrer"
           >
-            {full ? (waitingList ? "Join the waiting list" : "Fully booked") : "Reserve a seat"}
+            {full
+              ? waitingList
+                ? "Join the waiting list"
+                : "Fully booked"
+              : isCourse
+                ? "Book the course"
+                : "Reserve a seat"}
             <span className="sr-only"> for {title}</span>
           </a>
         )}
