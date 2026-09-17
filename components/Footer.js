@@ -46,10 +46,20 @@ export default function Footer() {
               here.
             </p>
             <div className="socials">
-              <a href="/" aria-label="Facebook">
+              <a
+                href="https://www.facebook.com/ByteBearAcademy"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Facebook"
+              >
                 <Facebook />
               </a>
-              <a href="/" aria-label="Instagram">
+              <a
+                href="https://www.instagram.com/bytebearacademy"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Instagram"
+              >
                 <Instagram />
               </a>
               <a href="/" aria-label="YouTube">
