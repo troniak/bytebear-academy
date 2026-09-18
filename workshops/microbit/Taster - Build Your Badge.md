@@ -2,7 +2,7 @@
 
 A free 50-minute live online micro:bit workshop for ages 8-11. Every child leaves with a
 working, personalised program they wrote themselves, and every parent leaves knowing what
-[Maker Level](../../docs/ByteBear%20Academy%20Curriculum%20Framework%20-%20Explorer%20to%20Leader%20Robotics,%20AI,%20and%20Physical%20Computing.md)
+[Maker Realm](../../curriculum/001-maker-kilo/README.md)
 is and how to book it.
 
 |                     |                                                                                                                                                                                                   |
@@ -15,7 +15,7 @@ is and how to book it.
 | **Platform**        | [makecode.microbit.org](https://makecode.microbit.org) — free, browser-based, no login, no download.                                                                                              |
 | **Hardware**        | None for families. The host holds a physical micro:bit v2 on camera.                                                                                                                              |
 | **Outcome**         | A personalised badge program running in the MakeCode simulator.                                                                                                                                   |
-| **Conversion goal** | Maker Level bookings taken by the stated deadline.                                                                                                                                                |
+| **Conversion goal** | Maker Realm Quest `00` (Signals) bookings taken by the stated deadline.                                                                                                                                                |
 | **Slides**          | [Build Your Badge — presenter deck](https://docs.google.com/presentation/d/1ef7cu59UF1lYFKm8gXgaEEuVgMS6zQOOngpAWlY_pJ4/edit) · 24 slides. Source: `Build Your Badge - deck.pptx` in this folder. |
 
 ## Why this shape works
@@ -23,9 +23,9 @@ is and how to book it.
 The child never waits for hardware and never hits a login wall, so the gap between "joined
 the call" and "made something light up" is under twelve minutes. The simulator is the whole
 platform, exactly as it is at
-[Explorer level](../../docs/ByteBear%20Academy%20Curriculum%20Framework%20-%20Explorer%20to%20Leader%20Robotics,%20AI,%20and%20Physical%20Computing.md),
+[Explorer realm](../../curriculum/000-explorer-byte/README.md),
 which means a family can try the program before buying anything. The blocks used here are the
-same blocks used on real micro:bit hardware at Maker Level, so nothing learned in this session
+same blocks used on real micro:bit hardware at Maker Realm, so nothing learned in this session
 is thrown away.
 
 ## Learning outcomes
@@ -83,8 +83,8 @@ re-upload rather than editing in both places, or the two will drift.
 | 15-16 | The deliberate bug, then the fix | 0:09-0:21 |
 | 17 | Core / Stretch / Boss | 0:21-0:31 |
 | 18-19 | Show & tell, then shoutouts | 0:31-0:38 |
-| 20-21 | Session 6 clip, then Session 8 | 0:38-0:44 |
-| 22-23 | Maker Level, then the price | 0:44-0:49 |
+| 20-21 | Mission `110` clip, then Demo Day | 0:38-0:44 |
+| 22-23 | Maker Realm, then the price | 0:44-0:49 |
 | 24 | Say cheese | 0:49-0:50 |
 
 Anything that needs to land in stages is built as consecutive slides rather than as an
@@ -101,7 +101,7 @@ presentation window only.
 ### Three things to do after uploading
 
 1. **Fill the placeholders on slide 23** — `[PRICE]`, `[CODE]`, `[DEADLINE]`.
-2. **Drop the Session 6 clip into slide 20**, over the dashed placeholder box (Insert → Video).
+2. **Drop the mission `110` clip into slide 20**, over the dashed placeholder box (Insert → Video).
    If you would rather play it from a separate tab, share that tab **with audio**.
 3. **Sort out a countdown for slide 17.** Neither PowerPoint nor Google Slides has one built
    in: run a timer app on your second screen, or insert a 10-minute countdown video onto the
@@ -120,7 +120,7 @@ fonts are installed locally.
 | 0:09-0:21 | Live code-along: build your badge | Building alongside the host |
 | 0:21-0:31 | Your turn: make it yours | Working independently on Core / Stretch / Boss |
 | 0:31-0:38 | Show & tell + shoutouts | Presenting, or watching peers present |
-| 0:38-0:44 | Sneak peek: here's Session 8 | Watching the aspirational demo |
+| 0:38-0:44 | Sneak peek: where Quest `00` ends | Watching the aspirational demo |
 | 0:44-0:49 | The offer | Parent-facing; children idle or still tinkering |
 | 0:49-0:50 | Send-off | Holding up their badge for the group photo |
 
@@ -304,22 +304,29 @@ up to their camera, or have the host rebuild their idea live in ten seconds and 
 Do **not** ask children to generate a MakeCode public share link — it publishes their project
 to a public URL, and that is not a decision to ask an eight-year-old to make on a live call.
 
-## 0:38-0:44 — Sneak peek: here's Session 8
+## 0:38-0:44 — Sneak peek: where Quest `00` ends
 
-**Goal:** Show the ceiling. This is the aspirational hook, not the sales pitch. No prices, no
-dates, no urgency in this segment.
+**Goal:** Show the ceiling *of the thing being sold*. Everything in this segment is Quest `00`
+material — the micro:bit on its own, no add-on kit — so a parent who books gets exactly what
+they were shown. This is the aspirational hook, not the sales pitch. No prices, no dates, no
+urgency in this segment.
 
 **Run order:**
 
-1. **Play the 60-90 second Session 6 clip** — the gesture-trained remote, where a child trains
-   a classifier on their own accelerometer data and drives something with a movement. Use
-   real footage of real children if you have it; a live host demo is the fallback.
-2. **Then describe Session 8 over a photo of a Demo Day call:**
+1. **Play the 60-90 second mission `110` clip** — the overnight investigation, where a child
+   leaves the micro:bit running in their bedroom all night logging light, temperature and
+   sound, then opens the chart the next morning. Show the chart on screen with the child
+   narrating what they found. Use real footage of real children if you have it; the fallback
+   is the host opening a saved log and reading it live.
+2. **Then describe mission `111` — Demo Day — over a photo of a showcase call:**
 
-> "That badge you just made? By Session 6 you're training the micro:bit to recognise *your*
-> movements. And by Session 8, pods of four kids in four different houses are running one
-> system together — each child programs one part, they agree on the messages the parts send
-> each other, and they demo the whole thing live. Four houses, one machine."
+> "That badge you just made? That's the first session. By session seven your micro:bit is
+> sitting in your bedroom all night on its own, writing down what the light and the
+> temperature and the noise are doing, and in the morning you open the chart and find out
+> what actually happens in your room while you're asleep. And in the very last session you
+> build your own invention — a reaction timer, a step counter, a dice, whatever you pick —
+> and you show it to everybody on Demo Day and tell them about the one bug that nearly beat
+> you."
 
 3. **Bring it back to what they just did:**
 
@@ -327,7 +334,9 @@ dates, no urgency in this segment.
 > a block inside it, and a bug you fixed."
 
 **Watch for:** the temptation to start pitching here. Do not. The gap between the demo and the
-offer is what makes the offer land.
+offer is what makes the offer land. Also resist reaching for the rover or the four-houses
+build to get a bigger reaction — those are later quests with their own kits, and promising
+them here sells something the family is not about to buy.
 
 ## 0:44-0:49 — The offer
 
@@ -338,7 +347,8 @@ keep tinkering."* Leave MakeCode open on screen so children have something to do
 
 **The one-breath explanation:**
 
-> "What we just did is the taster. The full thing is **Maker Level**: eight live sessions,
+> "What we just did is the taster. The full thing is **Signals**, the first quest of Maker
+> Realm: eight live missions,
 > small pods of four children, and one simple kit shipped to your door — a micro:bit, a
 > battery pack and a cable, nothing to buy separately. Ages 8 to 11. Every session ends with
 > something that works, and the last one is Demo Day."
@@ -383,7 +393,7 @@ Pre-written, pasted by the moderator. Keep these in a text file, not in memory.
 - **C1 (0:09, then every 2 min):** `Here's the editor — no login needed: https://makecode.microbit.org  → click "New Project" → name it "My Badge"`
 - **C2 (0:10):** `Stuck? Type STUCK in the chat and one of us will come to you. Nobody gets left behind.`
 - **C3 (0:21):** `🟢 Core: your name scrolls on A. 🟡 Stretch: your own drawing on B. 🔴 Boss: 3-frame animation + a sound. Green is the goal!`
-- **C4 (0:46, on cue):** `Maker Level — 8 live sessions, pods of 4, kit shipped to your door, ages 8-11. Book here: [LINK] · Workshop code: [CODE] · Closes [DEADLINE]`
+- **C4 (0:46, on cue):** `Maker Realm · Quest 00 "Signals" — 8 live missions, pods of 4, kit shipped to your door, ages 8-11. Book here: [LINK] · Workshop code: [CODE] · Closes [DEADLINE]`
 - **C5 (0:49):** `Thanks for building with us! Questions any time: [EMAIL]. The recording and a step-by-step of today's badge go out tonight.`
 - **C6 (as needed):** `Lost your project? It auto-saves — go back to makecode.microbit.org and it'll be on the home screen.`
 - **C7 (as needed):** `No sound? Check your own device volume, and make sure the sound block is inside "on button B pressed" and not "on start".`
@@ -401,7 +411,7 @@ Pre-written, pasted by the moderator. Keep these in a text file, not in memory.
 | T-5 min  | Both | Agree the show & tell picks will be DM'd during 0:21-0:31, and who calls the clock.                                           |
 
 **Host kit:** physical micro:bit v2, [the deck](https://docs.google.com/presentation/d/1ef7cu59UF1lYFKm8gXgaEEuVgMS6zQOOngpAWlY_pJ4/edit) open in Presenter View in its own
-window, a second screen or printed run sheet, a countdown timer, and the Session 6 clip
+window, a second screen or printed run sheet, a countdown timer, and the mission `110` clip
 queued and volume-checked (share that tab *with audio* when you play it).
 
 ## Contingencies
@@ -410,7 +420,7 @@ queued and volume-checked (share that tab *with audio* when you play it).
 | --- | --- |
 | A child cannot load MakeCode | Moderator DMs snippet C1; if it still fails, pair them to watch the host's screen and promise them the step-by-step email. Do not stall the room. |
 | The host's screen share dies | Moderator takes over narration from their own MakeCode window. Agree this handoff before the session. |
-| The Session 6 clip won't play | Host demos the gesture remote live on the physical micro:bit, or narrates the Demo Day photo. Never burn 90 seconds troubleshooting a video. |
+| The mission `110` clip won't play | Host opens a saved overnight log and reads the chart live, or narrates the Demo Day photo. Never burn 90 seconds troubleshooting a video. |
 | Nobody volunteers for show & tell | Host presents two children's work themselves, with credit, from screenshots the moderator grabbed during 0:21-0:31. Grab those screenshots every time as insurance. |
 | The room runs 3+ minutes late by 0:31 | Cut show & tell to two children. Never cut the sneak peek or the offer. |
 | Chat goes silent for 60+ seconds | Switch to a one-key poll ("type 1 if it's working, 2 if you're stuck"). |
@@ -443,9 +453,12 @@ Same day, while the badge is still fresh:
   and send-off are the remaining six. Advertise the workshop to families as 50 minutes so
   parents plan for the full block, and keep the "next 45 minutes" line in the hook — it
   describes the part the child is being promised.
-- **Session numbering** follows the Maker Level modules in the curriculum framework: the
-  gesture-trained classifier sits in Module 7 territory and lands around Session 6 of an
-  eight-session run, with the distributed pod build and Demo Day at Session 8. If the Maker
-  Level running order changes, update the sneak-peek segment to match.
+- **Session numbering.** The eight sessions this taster sells are Maker Realm **Quest `00`
+  (Signals)**, missions `000` to `111` — the micro:bit on its own, which is exactly the kit
+  described in the offer. Session one is mission `000`, session seven is mission `110` (the
+  overnight investigation used in the sneak peek) and session eight is mission `111`, Demo
+  Day. Keep the peek inside this quest. The gesture-trained classifier belongs to Quest `01`
+  mission `111` and needs the rover add-on; the four-houses-one-system build is Quest `10` and
+  needs the radio pack. Neither may be shown as part of what is being booked here.
 - **Placeholders to fill before the first run:** `[PRICE]`, `[CODE]`, `[DEADLINE]`, `[LINK]`,
   `[EMAIL]`.
