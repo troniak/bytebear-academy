@@ -612,7 +612,7 @@ section {
 
 .workshops-layout {
   display: grid;
-  grid-template-columns: 316px 1fr;
+  grid-template-columns: 340px 1fr;
   gap: 1.8rem;
   align-items: start;
 }
@@ -620,6 +620,55 @@ section {
 .workshop-list {
   display: grid;
   gap: 1.4rem;
+  align-content: start;
+}
+
+/* Says which date the cards below belong to — the calendar is above them, not
+   beside them, once the layout stacks. */
+.workshop-list-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding-bottom: 0.7rem;
+  border-bottom: 1px solid var(--line);
+}
+
+.workshop-list-head h3 {
+  font-size: 1.05rem;
+  color: var(--navy);
+}
+
+.workshop-list-head p {
+  margin: 0.15rem 0 0;
+  font-size: 0.82rem;
+  font-weight: 600;
+  opacity: 0.7;
+}
+
+/* Repeats the calendar's three frames as plain controls. */
+.workshop-scope {
+  display: flex;
+  flex-shrink: 0;
+  gap: 0.35rem;
+}
+
+.workshop-scope .workshop-chip {
+  font-size: 0.8rem;
+  padding: 0.3rem 0.75rem;
+}
+
+.workshop-list-more {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.7rem;
+  margin: 0.2rem 0 0;
+}
+
+.workshop-list-more .btn {
+  font-size: 0.86rem;
+  padding: 0.55rem 1.1rem;
 }
 
 /* ---------- Workshop calendar ---------- */
@@ -631,7 +680,7 @@ section {
   border: 1px solid var(--line);
   border-radius: var(--radius-md);
   box-shadow: var(--shadow-card);
-  padding: 1.2rem;
+  padding: 1rem;
 }
 
 .calendar-head {
@@ -674,10 +723,83 @@ section {
   cursor: not-allowed;
 }
 
-.calendar-grid {
+/* Three nested frames — month, week, day. Each of the outer two is a button
+   sitting behind its contents at z-index 0, so the ring of padding around it is
+   a click target of its own while everything inside keeps its own clicks. */
+.calendar-month {
+  position: relative;
+  padding: 8px;
+  border-radius: 14px;
+}
+
+.calendar-weekdays,
+.calendar-week {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
-  gap: 0.25rem;
+  gap: 3px;
+}
+
+.calendar-weekdays {
+  position: relative;
+  z-index: 1;
+  padding: 0 7px;
+}
+
+.calendar-week {
+  position: relative;
+  z-index: 1;
+  padding: 3px 7px;
+  border-radius: 12px;
+}
+
+.calendar-scope {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  padding: 0;
+  background: none;
+  border: 1.5px solid transparent;
+  border-radius: inherit;
+  cursor: pointer;
+  transition: border-color 0.15s ease, background 0.15s ease;
+}
+
+.calendar-scope:disabled {
+  cursor: default;
+}
+
+/* Anywhere inside a frame is that frame's target, not just its border. The
+   cells and the weekday strip are drawn but not clickable, so a click lands on
+   whichever frame is nearest behind it: a coloured day, else the week around
+   it, else — where that week is empty and its frame disabled — the month. */
+.calendar-weekdays,
+.calendar-week,
+.calendar-day {
+  pointer-events: none;
+}
+
+.calendar-scope:not(:disabled),
+.calendar-day.has-session {
+  pointer-events: auto;
+}
+
+/* Drawn at rest: an outline you cannot see is not one you would think to click.
+   A week with nothing in it stays invisible. The state rules below are ordered
+   after this one, which settles the tie with :not(:disabled). */
+.calendar-scope:not(:disabled) {
+  border-color: var(--line);
+}
+
+.calendar-scope:hover:not(:disabled),
+.calendar-scope:focus-visible,
+.calendar-scope[aria-pressed="true"] {
+  border-color: var(--teal);
+  background: var(--teal-tint);
+}
+
+.calendar-scope:focus-visible {
+  outline: 2px solid var(--teal);
+  outline-offset: 1px;
 }
 
 .calendar-weekday {
@@ -698,20 +820,31 @@ section {
   align-items: center;
   justify-content: center;
   position: relative;
+  z-index: 1;
   border-radius: 10px;
   font-size: 0.82rem;
   font-weight: 600;
   color: var(--text);
 }
 
-.calendar-day.is-empty {
-  visibility: hidden;
+/* The days either side of the month. Present, and clickable when they hold a
+   session — they are part of the first or last week, which is offered whole. */
+.calendar-day.is-outside {
+  opacity: 0.4;
+}
+
+.calendar-day.is-outside.has-session {
+  opacity: 0.72;
 }
 
 .calendar-day.has-session {
   font-family: var(--font-heading), sans-serif;
+  font-size: inherit;
   font-weight: 700;
   color: var(--navy);
+  border: 0;
+  padding: 0;
+  cursor: pointer;
   transition: transform 0.15s ease, box-shadow 0.15s ease;
 }
 
@@ -725,10 +858,20 @@ section {
   outline-offset: 2px;
 }
 
+.calendar-day.has-session[aria-pressed="true"] {
+  transform: translateY(-1px);
+  color: var(--white);
+}
+
 .calendar-day.has-session.teal { background: var(--teal-tint); box-shadow: inset 0 0 0 1.5px var(--teal); }
 .calendar-day.has-session.purple { background: var(--purple-tint); box-shadow: inset 0 0 0 1.5px var(--purple); }
 .calendar-day.has-session.blue { background: var(--blue-tint); box-shadow: inset 0 0 0 1.5px var(--blue); }
 .calendar-day.has-session.orange { background: var(--orange-tint); box-shadow: inset 0 0 0 1.5px var(--orange); }
+
+.calendar-day.has-session.teal[aria-pressed="true"] { background: var(--teal); box-shadow: inset 0 0 0 1.5px var(--teal); }
+.calendar-day.has-session.purple[aria-pressed="true"] { background: var(--purple); box-shadow: inset 0 0 0 1.5px var(--purple); }
+.calendar-day.has-session.blue[aria-pressed="true"] { background: var(--blue); box-shadow: inset 0 0 0 1.5px var(--blue); }
+.calendar-day.has-session.orange[aria-pressed="true"] { background: var(--orange); box-shadow: inset 0 0 0 1.5px var(--orange); }
 
 .calendar-count {
   position: absolute;
@@ -1867,6 +2010,13 @@ section {
   /* Too narrow to sit the count opposite the chips — let it wrap under them. */
   .workshop-filter-count {
     margin-left: 0;
+  }
+
+  /* Same at the head of the list: the scope switcher drops below the date. */
+  .workshop-list-head {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.6rem;
   }
 
   .workshop-foot {
