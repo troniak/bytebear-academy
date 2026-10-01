@@ -19,6 +19,7 @@ const footerLinks = {
     ["Contact Us", "/#enroll"],
   ],
   Resources: [
+    ["Student Showcase", "/showcase"],
     ["Blog", "https://hub.bytebearacademy.com"],
     ["Events", "/#workshops"],
     ["FAQ", "/"],

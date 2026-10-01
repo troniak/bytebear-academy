@@ -73,6 +73,8 @@ const programs = [
     title: "Game Design",
     ages: "Ages 8–14",
     text: "Design games, build worlds, and unleash creativity with code.",
+    href: "/showcase",
+    linkLabel: "See a Student Game",
   },
   {
     icon: <Palette />,
@@ -187,9 +189,9 @@ export default async function Home() {
                     <h3>{program.title}</h3>
                     <p className="program-ages">{program.ages}</p>
                     <p className="desc">{program.text}</p>
-                    <a className={`program-link ${program.accent}`} href="#enroll">
-                      Learn More <ArrowRight />
-                    </a>
+                    <Link className={`program-link ${program.accent}`} href={program.href ?? "#enroll"}>
+                      {program.linkLabel ?? "Learn More"} <ArrowRight />
+                    </Link>
                   </div>
                 </article>
               ))}

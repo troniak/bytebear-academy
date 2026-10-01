@@ -1836,6 +1836,170 @@ section {
 
 /* ---------- Responsive ---------- */
 
+/* ---------- Showcase: student case studies ---------- */
+
+.showcase-hero {
+  max-width: 52rem;
+  text-align: center;
+}
+
+.showcase-hero .lead {
+  max-width: 40rem;
+  margin-inline: auto;
+}
+
+.showcase-actions {
+  justify-content: center;
+  margin: 1.6rem 0 0;
+}
+
+.showcase-feature {
+  padding: 0 0 3rem;
+}
+
+.showcase-shot {
+  margin: 0;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  background: var(--white);
+  box-shadow: var(--shadow-card);
+}
+
+.showcase-shot img {
+  width: 100%;
+  height: auto;
+}
+
+.showcase-shot-lead {
+  box-shadow: var(--shadow-pop);
+}
+
+.showcase-features {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.4rem;
+  margin-top: 2.2rem;
+}
+
+.showcase-features li {
+  display: flex;
+  gap: 0.75rem;
+  align-items: flex-start;
+}
+
+.showcase-features h3 {
+  font-size: 0.98rem;
+  font-weight: 700;
+  margin-bottom: 0.2rem;
+}
+
+.showcase-features p {
+  font-size: 0.88rem;
+}
+
+.showcase-walkthrough {
+  padding: 1.5rem 0 3.5rem;
+}
+
+.showcase-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.6rem;
+}
+
+.showcase-shot figcaption {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  column-gap: 0.8rem;
+  row-gap: 0.15rem;
+  padding: 1.1rem 1.3rem 1.3rem;
+  font-size: 0.9rem;
+}
+
+.showcase-shot figcaption strong {
+  font-family: var(--font-heading), sans-serif;
+  color: var(--navy);
+}
+
+.showcase-shot figcaption span:last-child {
+  grid-column: 2;
+}
+
+.showcase-step {
+  grid-row: span 2;
+  font-family: var(--font-heading), sans-serif;
+  font-weight: 800;
+  font-size: 1.3rem;
+  line-height: 1.2;
+  color: var(--purple);
+}
+
+.showcase-process {
+  grid-template-columns: 1fr 1fr;
+  align-items: start;
+}
+
+.showcase-process .section-title {
+  margin-bottom: 0.9rem;
+}
+
+.showcase-steps {
+  list-style: none;
+  counter-reset: step;
+  display: grid;
+  gap: 1.1rem;
+}
+
+.showcase-steps li {
+  counter-increment: step;
+  position: relative;
+  padding-left: 2.6rem;
+}
+
+.showcase-steps li::before {
+  content: counter(step);
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 1.8rem;
+  height: 1.8rem;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: var(--teal-tint);
+  color: var(--teal);
+  font-family: var(--font-heading), sans-serif;
+  font-weight: 700;
+  font-size: 0.85rem;
+}
+
+.showcase-steps h3 {
+  font-size: 1rem;
+  font-weight: 700;
+  margin-bottom: 0.15rem;
+}
+
+.showcase-steps p {
+  font-size: 0.92rem;
+}
+
+@media (max-width: 860px) {
+  .showcase-features {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .showcase-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 600px) {
+  .showcase-features {
+    grid-template-columns: 1fr;
+  }
+}
+
 @media (max-width: 1024px) {
   .program-grid {
     grid-template-columns: repeat(2, 1fr);

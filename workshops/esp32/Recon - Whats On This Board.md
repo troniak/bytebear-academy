@@ -10,6 +10,11 @@ Students who **have** enrolled arrive with their kit unopened and open it live a
 is the moment the visiting families are really being sold to, because it is not a pitch, it is
 the child next to them building a circuit.
 
+**Two presenters, and a room each?** [Recon Mission: Operation Blackbox](Recon%20Mission%20-%20Operation%20Blackbox.md)
+is the same Quest `00` mission staged for a Squad Leader and a Mission Control, with the
+recruits sent through a portal into a breakout room and their families kept at HQ for a full
+briefing and Q&A. It needs two devices per family and one more presenter; it converts better.
+
 |                     |                                                                                                                                            |
 | ------------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
 | **Ages**            | 11+                                                                                                                                        |
@@ -71,8 +76,8 @@ while True:
     time.sleep(0.2)
 ```
 
-Three components are wired on the simulated breadboard: a light sensor, a potentiometer and a
-pushbutton. The console prints three numbers twenty times a minute and says nothing about
+Three components are wired to the simulated board: a light sensor, a potentiometer and a
+pushbutton. The console prints three numbers five times a second and says nothing about
 which is which. The only way through is to interfere with one thing and watch which column
 moves — which is the method the whole realm runs on.
 
@@ -103,24 +108,54 @@ while True:
     time.sleep(0.2)
 ```
 
-**The threshold must be theirs.** Do not give a number. Have them cover the sensor, read the
-console, uncover it, read it again, and pick something in between. That single decision is the
-difference between typing along and engineering, and it is the moment to name out loud.
+**The threshold must be theirs.** Do not give a number. There is nothing to cover in a
+simulator: with the simulation running, clicking the light sensor brings up a slider over it.
+Have them drag it all the way dark, read the console, drag it all the way bright, read it
+again, and pick something in between. That single decision is the difference between typing
+along and engineering, and it is the moment to name out loud.
 
 ### The deliberate mistake
 
-At roughly 0:25, un-indent the `if` block so it sits outside the `while` loop. Run it. The LED
-sets once and then never changes again, no matter what the sensor does.
+At roughly 0:25, take the `if`/`else` out of the loop. Run it. **The LED never comes on at all**
+— not once, no matter what the slider does — while the numbers carry on scrolling exactly as
+before.
 
-> "So my code is right. The logic is right. The sensor is fine — look, the numbers are still
-> moving. But the light never changes. Why?"
+```python
+while True:
+    light = a.read()
+    print(light)
+    time.sleep(0.2)
+
+if light < 1000:          # <- not inside the loop any more
+    led.value(1)
+else:
+    led.value(0)
+```
+
+**Make the edit by pasting, not by shift-tabbing.** Keep the broken version above in a second
+browser tab and paste the whole program over. If you do insist on doing it by hand, un-indent
+the four `if`/`else` lines *and move `time.sleep(0.2)` up under the `print`*, because otherwise
+the sleep is left dangling at the end and Python reads it as part of the `else` block — the loop
+then has no sleep in it, you get a wall of numbers, and the room is now debugging two things at
+once instead of the one you meant.
+
+> "So my code is right. The logic is right. The sensor's fine — look, the numbers are still
+> scrolling. But that LED never comes on. Not once. Why?"
 >
-> "Because in Python, the spaces at the front of the line are not decoration. They're how you
-> say what's *inside* the loop. I put the `if` outside it, so it ran once, before the loop
-> even started, and never again."
+> "Because in Python, the spaces at the front of a line are not decoration. They're how you say
+> what's *inside* what. Those four lines aren't inside the loop any more, so they're not part of
+> it — they're what happens *after* the loop has finished."
 >
-> "This is the thing text code asks of you that drag-and-drop blocks never did. It catches
-> everybody, including me, ten seconds ago, on purpose."
+> *(and then, to the room, and wait for it)*
+>
+> "So when does `while True` finish?"
+
+Somebody will say "never", and that is the whole lesson in one word: the `if` is not broken and
+it is not wrong, it is *waiting for a moment that never comes*. Say it back to them:
+
+> "Never. So that `if` is queued up behind a loop that never ends, and Python will never get to
+> it. This is the thing text code asks of you that drag-and-drop blocks never did — and it
+> catches everybody, including me, ten seconds ago, on purpose."
 
 Re-indent. Run. Celebrate.
 
@@ -204,8 +239,8 @@ the start that reading the code is the *last* step, not the first.
 
 **Goal:** Every student has an LED responding to a threshold they chose themselves.
 
-Code along, slowly, one line at a time. Do the threshold discovery properly — cover, read,
-uncover, read, choose. Then run **the deliberate mistake** above at around 0:25.
+Code along, slowly, one line at a time. Do the threshold discovery properly — slider dark,
+read; slider bright, read; choose. Then run **the deliberate mistake** above at around 0:25.
 
 **Watch for:** the temptation to hand out a threshold to speed things up. Don't. A student who
 was given `1000` learned typing; a student who chose `740` because that was halfway between
@@ -217,7 +252,7 @@ what they measured learned the realm.
 
 | Tier | Challenge | What it needs |
 | --- | --- | --- |
-| 🟢 **Core** | The LED comes on when you cover the sensor, off when you uncover it. | The threshold you chose, in an `if`/`else` inside the loop |
+| 🟢 **Core** | The LED comes on when you drag the light down to dark, and off when you bring it back. | The threshold you chose, in an `if`/`else` inside the loop |
 | 🟡 **Stretch** | Use the knob to set the threshold live, so you can tune it without editing code. | Read `b` each time round and compare `a` against it |
 | 🔴 **Boss** | A burglar alarm: when it goes dark the LED blinks and *keeps* blinking until the button is pressed. | A variable that remembers the alarm is going — the first state machine most of them will write |
 
@@ -250,15 +285,17 @@ a circuit. This is the segment the whole workshop exists for. Protect its eight 
 
 1. **Countdown and open, together.** Ten seconds of noise. Let it be noisy.
 2. **Inventory on camera**, host holding each part up as they find it: board, USB cable,
-   breadboard, jumper wires, LEDs, resistors, light sensor, potentiometer, button. Name what
-   each one is for in five words. Do not teach yet.
+   breadboard, jumper wires, LEDs, resistors, light sensor, potentiometer, button, battery
+   holder. Name what each one is for in five words. Do not teach yet — except the battery
+   holder, which is worth one extra line: *"that one's for the last session, when you unplug
+   the laptop and it keeps running anyway."*
 3. **Build one circuit, host-led, big close-up, slow:** LED and its resistor, then the light
    sensor and its resistor. Four components, six pushes. The wiring card in the box has the
    same picture.
 4. **Plug in the USB.** The board ships pre-flashed with the Core program already on it, so it
    starts running the moment it has power. No laptop software, no install, no login.
-5. **Everyone covers their sensor.** Some LEDs come on. **Some do not** — and that is the
-   whole point of the next four minutes.
+5. **Everyone covers their sensor — with a hand, for the first time today.** Some LEDs come
+   on. **Some do not** — and that is the whole point of the next four minutes.
 
 **The gap, which is the actual pitch — do not rush it:**
 
@@ -339,7 +376,7 @@ declined before the image is used anywhere. **End on time.**
 
 - **C1 (0:08, then every 2 min):** `Open this, then press the green ▶ button: [WOKWI LINK] — no account needed. You should see three numbers scrolling.`
 - **C2 (0:09):** `Stuck? Type STUCK and one of us will come to you. Nobody gets left behind.`
-- **C3 (0:28):** `🟢 Core: LED reacts when you cover the sensor. 🟡 Stretch: the knob sets the threshold. 🔴 Boss: it keeps blinking until you press the button. Green is the goal!`
+- **C3 (0:28):** `🟢 Core: LED reacts when you drag the light sensor's slider down to dark. 🟡 Stretch: the knob sets the threshold. 🔴 Boss: it keeps blinking until you press the button. Green is the goal!`
 - **C4 (0:52, on cue):** `Innovator Realm · Quest 00 "Circuits" — 8 live missions, pods of 4, kit shipped to your door, ages 11+. Book: [LINK] · Code: [CODE] · Closes [DEADLINE]`
 - **C5 (0:54):** `Thanks for building with us! The recording, today's code and the wiring card go out tonight: [EMAIL]`
 - **C6 (as needed):** `Wall of numbers? Make sure `time.sleep(0.2)` is the last line INSIDE the loop, indented the same as the print.`
@@ -348,16 +385,16 @@ declined before the image is used anywhere. **End on time.**
 
 ## Before the workshop
 
-| When | Who | What |
-| --- | --- | --- |
-| T-14 days | Ops | Enrolled kits posted, **sealed, with a "Do not open until [date]" sticker** and the wiring card inside. Boards flashed with MicroPython and the Core program as `main.py`. |
-| T-7 days | Ops | Confirmation email to everyone: date, link, **"a laptop or desktop, please not a phone"**. Separate line to enrolled families: *keep the box sealed, bring it to the call.* |
-| T-2 days | Ops | Check with enrolled families that the box actually arrived. A student whose kit is in a depot needs to know before the session, not during it. |
-| T-1 day | Host | Run the Wokwi project end to end in a fresh browser profile with no account logged in. **Confirm it runs without a login** — if a shared link now prompts for one, fall back to the "new project" link and paste the code from snippet C1. |
-| T-1 day | Host | Build the real circuit from the wiring card, on the actual shipped kit, and confirm the pre-flashed program runs on power-up. Write down the real sensor readings in your own room — you will quote them at 0:41. |
-| T-30 min | Host | Board wired and framed on camera. Second board ready as a swap. Timer running. |
-| T-15 min | Both | Open the room. Moderator greets arrivals and walks them to the simulator. |
-| T-5 min | Both | Agree show & tell picks will be DM'd during 0:28-0:37, and who calls the clock. |
+| When      | Who  | What                                                                                                                                                                                                                                                                                           |
+| --------- | ---- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| T-14 days | Ops  | Enrolled kits posted, **sealed, with a "Do not open until [date]" sticker** and the wiring card inside. Boards flashed with MicroPython and the Core program as `main.py`. Packing, sourcing and the tracking log: [Kit Fulfilment](../../docs/kit-fulfilment.md).                             |
+| T-7 days  | Ops  | Confirmation email to everyone: date, link, **"a laptop or desktop, please not a phone"**. Separate line to enrolled families: *keep the box sealed, bring it to the call.* Families who sourced their own kit get the flash-before-the-call instructions — an unflashed board cannot do 0:41. |
+| T-2 days  | Ops  | Check with enrolled families that the box actually arrived. A student whose kit is in a depot needs to know before the session, not during it.                                                                                                                                                 |
+| T-1 day   | Host | Run the Wokwi project end to end in a fresh browser profile with no account logged in. **Confirm it runs without a login** — if a shared link now prompts for one, fall back to the "new project" link and paste the code from snippet C1.                                                     |
+| T-1 day   | Host | Build the real circuit from the wiring card, on the actual shipped kit, and confirm the pre-flashed program runs on power-up. Write down the real sensor readings in your own room — you will quote them at 0:41.                                                                              |
+| T-30 min  | Host | Board wired and framed on camera. Second board ready as a swap. Timer running.                                                                                                                                                                                                                 |
+| T-15 min  | Both | Open the room. Moderator greets arrivals and walks them to the simulator.                                                                                                                                                                                                                      |
+| T-5 min   | Both | Agree show & tell picks will be DM'd during 0:28-0:37, and who calls the clock.                                                                                                                                                                                                                |
 
 ## Contingencies
 
@@ -401,7 +438,11 @@ declined before the image is used anywhere. **End on time.**
 - **The unboxing is the pitch, so it is scheduled before the offer, not during it.** By the
   time the price is said, the visiting family has already watched the thing they would be
   buying, being used by a child their child's age.
-- **Pre-flashing is not optional.** Flashing firmware and installing Thonny is mission `000`'s
-  job and takes longer than this whole segment. Boards ship ready to run.
+- **Pre-flashing is not optional *for this session*.** The gap at 0:41 needs a board that runs
+  the moment it has power, and flashing firmware and installing Thonny is mission `000`'s job —
+  it takes longer than this whole segment. Boards ship ready to run. Note what that rule is
+  actually protecting: students reflash in mission `000` regardless, and a family who never
+  attends a recon workshop needs no pre-flash at all. [Kit Fulfilment](../../docs/kit-fulfilment.md)
+  scopes it.
 - **Placeholders to fill before the first run:** `[PRICE]`, `[CODE]`, `[DEADLINE]`, `[LINK]`,
   `[EMAIL]`, `[WOKWI LINK]`, and the "do not open until" date on the sticker.

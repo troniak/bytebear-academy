@@ -14,7 +14,7 @@ slides: TBD
 
 ## What the student makes
 
-The same blink written as a file, saved to the board as `main.py`, and running on battery the moment it is plugged in with no laptop attached
+The same blink written as a file, saved to the board as `main.py`, and starting on its own the moment the board has power, with no laptop attached and nobody pressing play
 
 ## Concepts and standards
 
@@ -41,6 +41,7 @@ Follows the ByteBear 5E shape. Not yet written.
 - Breadboard and jumper wires
 - LEDs, resistors, a pushbutton, a potentiometer and a light-dependent resistor
 - Temperature and humidity sensor from the starter kit
+- Any USB power source that is not the laptop — a phone charger will do. The battery holder and the full untethered demonstration are mission [`111`](../111-off-the-laptop/); here it only has to start without Thonny
 
 ## Resources in this folder
 

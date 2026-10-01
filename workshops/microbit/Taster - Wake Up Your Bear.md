@@ -1,22 +1,22 @@
-# Taster: Build Your Badge
+# Taster: Wake Up Your Bear
 
 A free 50-minute live online micro:bit workshop for ages 8-11. Every child leaves with a
 working, personalised program they wrote themselves, and every parent leaves knowing what
 [Maker Realm](../../curriculum/001-maker-kilo/README.md)
 is and how to book it.
 
-|                     |                                                                                                                                                                                                   |
-| ------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Ages**            | 8-11                                                                                                                                                                                              |
-| **Length**          | 50 minutes, door to door. The child-facing portion is the first 45.                                                                                                                               |
-| **Format**          | Live online, video call. Cameras optional, chat essential.                                                                                                                                        |
-| **Group size**      | 12-25 children. Above 25, add a second chat moderator.                                                                                                                                            |
-| **Staffing**        | Host + chat moderator. Two people. Never run this solo.                                                                                                                                           |
-| **Platform**        | [makecode.microbit.org](https://makecode.microbit.org) — free, browser-based, no login, no download.                                                                                              |
-| **Hardware**        | None for families. The host holds a physical micro:bit v2 on camera.                                                                                                                              |
-| **Outcome**         | A personalised badge program running in the MakeCode simulator.                                                                                                                                   |
-| **Conversion goal** | Maker Realm Quest `00` (Signals) bookings taken by the stated deadline.                                                                                                                                                |
-| **Slides**          | [Build Your Badge — presenter deck](https://docs.google.com/presentation/d/1ef7cu59UF1lYFKm8gXgaEEuVgMS6zQOOngpAWlY_pJ4/edit) · 24 slides. Source: `Build Your Badge - deck.pptx` in this folder. |
+|                     |                                                                                                                                                                                                     |
+| ------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Ages**            | 8-11                                                                                                                                                                                                |
+| **Length**          | 50 minutes, door to door. The child-facing portion is the first 45.                                                                                                                                 |
+| **Format**          | Live online, video call. Cameras optional, chat essential.                                                                                                                                          |
+| **Group size**      | 12-25 children. Above 25, add a second chat moderator.                                                                                                                                              |
+| **Staffing**        | Host + chat moderator. Two people. Never run this solo.                                                                                                                                             |
+| **Platform**        | [makecode.microbit.org](https://makecode.microbit.org) — free, browser-based, no login, no download.                                                                                                |
+| **Hardware**        | None for families. The host holds a physical micro:bit v2 on camera.                                                                                                                                |
+| **Outcome**         | A personalised bear program running in the MakeCode simulator.                                                                                                                                      |
+| **Conversion goal** | Maker Realm Quest `00` (Signals) bookings taken by the stated deadline.                                                                                                                             |
+| **Slides**          | [Wake Up Your Bear — presenter deck](https://docs.google.com/presentation/d/1ef7cu59UF1lYFKm8gXgaEEuVgMS6zQOOngpAWlY_pJ4/edit) · 24 slides. Source: `Wake Up Your Bear - deck.pptx` in this folder. |
 
 ## Why this shape works
 
@@ -47,12 +47,28 @@ Build exactly this, in this order. Every block is in the standard toolbox — no
 | Order | Event block (category) | Inside it | What the child sees |
 | --- | --- | --- | --- |
 | 1 | `on start` (Basic) | `show icon 🙂` | The face appears the moment the program runs. |
-| 2 | `on button A pressed` (Input) | `show string "D"` | Their initial scrolls across the LEDs. |
-| 3 | `on button B pressed` (Input) | `play sound giggle until done` (Music) | A sound plays on press. |
-| 4 | `on logo pressed` (Input) | `show icon ♥` | Touching the gold logo shows a heart. |
+| 2 | `on button A pressed` (Input) | `show string "wake up"` | The words scroll across the LEDs. |
+| 3 | `on shake` (Input) | `play sound giggle until done` (Music) | Shaking the bear makes it giggle. |
+| 4 | `on logo pressed` (Input) | `show leds` — a bear face | Touching the gold logo shows the bear. |
 
 Notes for the host:
 
+- **There is no built-in bear icon.** Draw the bear with `show leds` (Basic) by clicking
+  squares in the 5x5 grid. The reference face is below, the same bear as Maker Realm
+  [mission `000`](../../curriculum/001-maker-kilo/quest-00-signals/000-hello-bear/README.md):
+
+  ```
+  # . . . #     ears, in the two top corners
+  . # # # .     top of the head
+  # # . # #     the sides, with an eye tucked inside each one
+  # . # . #     the sides again, and the snout between them
+  . # # # .     the chin, closing the outline
+  ```
+
+  Children will change it, and they should. It only has to read as *their* bear.
+- **`on shake` lives under Input**, below the button blocks, and it fires from the simulator's
+  **SHAKE** button on the board image — not from shaking a mouse. Say that out loud; several
+  children will otherwise decide their sound block is broken.
 - `on logo pressed` and `play sound` are **micro:bit v2** features. The simulator defaults to
   v2, so they work out of the box. Do not switch the simulator to v1.
 - `show string` scrolls; `show icon` holds. That difference is worth naming out loud — it is
@@ -63,9 +79,9 @@ Notes for the host:
 
 ## The deck
 
-[**Build Your Badge — presenter deck**](https://docs.google.com/presentation/d/1ef7cu59UF1lYFKm8gXgaEEuVgMS6zQOOngpAWlY_pJ4/edit) — 24 slides, one per beat of the agenda below.
+[**Wake Up Your Bear — presenter deck**](https://docs.google.com/presentation/d/1ef7cu59UF1lYFKm8gXgaEEuVgMS6zQOOngpAWlY_pJ4/edit) — 24 slides, one per beat of the agenda below.
 
-**The source file is `Build Your Badge - deck.pptx`, in this folder**, and the link above is
+**The source file is `Wake Up Your Bear - deck.pptx`, in this folder**, and the link above is
 that file uploaded to Google Slides. Keep the `.pptx` as the master copy: edit it and
 re-upload rather than editing in both places, or the two will drift.
 
@@ -79,7 +95,7 @@ re-upload rather than editing in both places, or the two will drift.
 | 4-8 | The five senses, revealed one per slide | 0:03-0:09 |
 | 9 | "It does nothing until you tell it what to do" | 0:03-0:09 |
 | 10 | Open the editor | 0:09-0:21 |
-| 11-14 | The four badge blocks, one per build step | 0:09-0:21 |
+| 11-14 | The four bear blocks, one per build step | 0:09-0:21 |
 | 15-16 | The deliberate bug, then the fix | 0:09-0:21 |
 | 17 | Core / Stretch / Boss | 0:21-0:31 |
 | 18-19 | Show & tell, then shoutouts | 0:31-0:38 |
@@ -117,12 +133,12 @@ fonts are installed locally.
 | --- | --- | --- |
 | 0:00-0:03 | Welcome & hook | Typing name and age in chat |
 | 0:03-0:09 | Meet your micro-computer | Guessing what the board can sense |
-| 0:09-0:21 | Live code-along: build your badge | Building alongside the host |
+| 0:09-0:21 | Live code-along: wake up your bear | Building alongside the host |
 | 0:21-0:31 | Your turn: make it yours | Working independently on Core / Stretch / Boss |
 | 0:31-0:38 | Show & tell + shoutouts | Presenting, or watching peers present |
 | 0:38-0:44 | Sneak peek: where Quest `00` ends | Watching the aspirational demo |
 | 0:44-0:49 | The offer | Parent-facing; children idle or still tinkering |
-| 0:49-0:50 | Send-off | Holding up their badge for the group photo |
+| 0:49-0:50 | Send-off | Holding up their bear for the group photo |
 
 ---
 
@@ -179,7 +195,7 @@ or a slide flip per reveal.
 **Watch for:** Do not let this run past 0:09. It is the segment that overruns most often
 because the guessing game is genuinely fun. Set a visible timer for yourself.
 
-## 0:09-0:21 — Live code-along: build your badge
+## 0:09-0:21 — Live code-along: wake up your bear
 
 **Goal:** Every child has a running program with four events by 0:21. This is the segment the
 whole workshop is built around; protect its twelve minutes.
@@ -197,21 +213,22 @@ Build in this rhythm, one block at a time:
    this. Ask for a "1" in chat from everyone who can see the yellow `on start` block.
 2. **`on start` → `show icon`.** Press the simulator's run. "That's a program. You've written
    a program. It's been ninety seconds."
-3. **`on button A pressed` → `show string`,** change the text to their own initial. "Click
-   the A button on the simulator, not on your keyboard."
-4. **`on button B pressed` → `play sound`.** Remind everyone to unmute their own device
+3. **`on button A pressed` → `show string`,** type `wake up` into it. "Click the A button on
+   the simulator, not on your keyboard."
+4. **`on shake` → `play sound giggle`.** It is in Input, under the button blocks. Click
+   **SHAKE** on the simulator board to fire it. Remind everyone to unmute their own device
    volume — a silent result here reads as a bug to an eight-year-old.
-5. **`on logo pressed` → `show icon heart`.** "Remember the gold logo we touched? Same thing,
-   but on screen."
+5. **`on logo pressed` → `show leds`,** and draw the bear together, square by square, from the
+   grid above. "Remember the gold logo we touched? Touch it and your bear wakes up."
 
 ### The deliberate mistake
 
 Around 0:15, when the `play sound` block comes out, drop it into `on start` instead of
-`on button B pressed`. Run it. The sound fires once at launch and button B does nothing.
+`on shake`. Run it. The giggle fires once at launch and shaking does nothing.
 
 Then think out loud:
 
-> "Hang on. I pressed B and nothing happened. But the sound definitely played... it played
+> "Hang on. I shook it and nothing happened. But the sound definitely played... it played
 > when the program started. So the block isn't broken — I put it in the wrong container.
 > The computer did exactly what I told it, not what I meant."
 >
@@ -219,7 +236,7 @@ Then think out loud:
 > together in the real class. Anyone who's ever fixed something that was broken — you're
 > already good at this."
 
-Drag it into `on button B pressed`. Re-run. Celebrate.
+Drag it into `on shake`. Re-run. Celebrate.
 
 **Why this specific bug:** it teaches the single idea the rest of the session depends on — a
 block does nothing on its own; it only runs when the event around it fires. Children who see
@@ -239,9 +256,9 @@ music. Host stops presenting and works the chat.
 
 | Tier | Challenge | Blocks needed |
 | --- | --- | --- |
-| 🟢 **Core** | Your full name scrolls when you press A. | `show string` with your name typed in |
-| 🟡 **Stretch** | Your own 5x5 drawing when you press B. | `show leds` — click squares to draw |
-| 🔴 **Boss** | A 3-frame animation with a sound. | Three `show leds` + `pause (200)` between each + `play sound` |
+| 🟢 **Core** | `Wake up, <your name>!` scrolls when you press A. | `show string` with your name typed in |
+| 🟡 **Stretch** | A second bear face — sleepy, grumpy, hungry — on button B. | `show leds` — click squares to draw |
+| 🔴 **Boss** | A 3-frame waking-up animation with a sound. | Three `show leds` + `pause (200)` between each + `play sound` |
 
 **Say this when you set them off:**
 
@@ -267,7 +284,7 @@ get it running, don't start something new").
   child, DM them directly. Nine times out of ten it is the simulator scrolled off screen or a
   blank project.
 - **`show leds` overwhelm.** Twenty-five clickable squares freezes some children. Tell them
-  to draw a letter, not a picture.
+  to copy the bear they already drew and change two squares, not to start from blank.
 - **Animation without pauses.** The classic Boss-tier bug: three `show leds` in a row with no
   `pause`, so only the last one appears. Let them hit it, then ask what's missing — do not
   pre-empt it.
@@ -320,7 +337,7 @@ urgency in this segment.
    is the host opening a saved log and reading it live.
 2. **Then describe mission `111` — Demo Day — over a photo of a showcase call:**
 
-> "That badge you just made? That's the first session. By session seven your micro:bit is
+> "That bear you just made? That's the first session. By session seven your micro:bit is
 > sitting in your bedroom all night on its own, writing down what the light and the
 > temperature and the noise are doing, and in the morning you open the chart and find out
 > what actually happens in your room while you're asleep. And in the very last session you
@@ -375,7 +392,7 @@ a discount. If a family needs something bespoke, take it to email.
 
 ## 0:49-0:50 — Send-off
 
-> "Last thing — everyone hold up your screen with your badge on it. Ready? Say cheese!"
+> "Last thing — everyone hold up your screen with your bear on it. Ready? Say cheese!"
 
 **Screenshot the gallery view.** Consent for this must already be on file from the booking
 form; the on-call ask is a courtesy reminder, not the consent itself. Any family who declined
@@ -390,13 +407,13 @@ teaches parents that your sessions overrun.
 
 Pre-written, pasted by the moderator. Keep these in a text file, not in memory.
 
-- **C1 (0:09, then every 2 min):** `Here's the editor — no login needed: https://makecode.microbit.org  → click "New Project" → name it "My Badge"`
+- **C1 (0:09, then every 2 min):** `Here's the editor — no login needed: https://makecode.microbit.org  → click "New Project" → name it "My Bear"`
 - **C2 (0:10):** `Stuck? Type STUCK in the chat and one of us will come to you. Nobody gets left behind.`
-- **C3 (0:21):** `🟢 Core: your name scrolls on A. 🟡 Stretch: your own drawing on B. 🔴 Boss: 3-frame animation + a sound. Green is the goal!`
+- **C3 (0:21):** `🟢 Core: "Wake up, <your name>!" scrolls on A. 🟡 Stretch: a second bear face on B. 🔴 Boss: 3-frame animation + a sound. Green is the goal!`
 - **C4 (0:46, on cue):** `Maker Realm · Quest 00 "Signals" — 8 live missions, pods of 4, kit shipped to your door, ages 8-11. Book here: [LINK] · Workshop code: [CODE] · Closes [DEADLINE]`
-- **C5 (0:49):** `Thanks for building with us! Questions any time: [EMAIL]. The recording and a step-by-step of today's badge go out tonight.`
+- **C5 (0:49):** `Thanks for building with us! Questions any time: [EMAIL]. The recording and a step-by-step of today's bear go out tonight.`
 - **C6 (as needed):** `Lost your project? It auto-saves — go back to makecode.microbit.org and it'll be on the home screen.`
-- **C7 (as needed):** `No sound? Check your own device volume, and make sure the sound block is inside "on button B pressed" and not "on start".`
+- **C7 (as needed):** `No sound? Check your own device volume, press SHAKE on the simulator board, and make sure the sound block is inside "on shake" and not "on start".`
 
 ## Before the workshop
 
@@ -428,9 +445,9 @@ queued and volume-checked (share that tab *with audio* when you play it).
 
 ## After the workshop
 
-Same day, while the badge is still fresh:
+Same day, while the bear is still fresh:
 
-1. **Follow-up email to every family** — the recording, a step-by-step of today's badge so
+1. **Follow-up email to every family** — the recording, a step-by-step of today's bear so
    children can rebuild it, and the offer restated once with the deadline.
 2. **Screenshot triage** — crop out any non-consenting tile before the image goes anywhere.
 3. **Debrief, 10 minutes, host + moderator:** where did the clock slip, which children needed
